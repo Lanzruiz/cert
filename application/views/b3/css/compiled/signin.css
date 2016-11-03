@@ -8,6 +8,8 @@
   background-size: cover;
 }
 
+
+
 .login-wrapper {
   position: absolute;
   top: 90px;
@@ -19,6 +21,8 @@
   margin-bottom: 45px;
   position: relative;
   left: -2px;
+  width: 30%;
+  height: 10%;
 }
 .login-wrapper .box {
   margin: 0 auto;
@@ -69,7 +73,7 @@
   font-size: 15px;
 }
 .login-wrapper .box a.forgot {
-  display: block;
+  float:right;
   text-align: right;
   font-style: italic;
   text-decoration: underline;

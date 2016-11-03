@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>application/views/b3/css/compiled/icons.css" />
 
     <!-- libraries -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>application/views/b3/css/lib/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>application/views/b3//lib/font-awesome.css" />
     
     <!-- this page specific styles -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/b3/css/compiled/signin.css" type="text/css" media="screen" />
@@ -30,55 +30,60 @@
 <body>
 
 
-  
+   
 
     <div class="login-wrapper">
-      
+        <a href="index.html">
+            <img class="logo" src="<?php echo base_url(); ?>application/views/b3/img/logo-white2.png" alt="logo" />
+        </a>
+
         <div class="box">
+
+            <?php echo form_open('systems/process/admin/login'); ?>
             <div class="content-wrap">
-            <?php echo validation_errors(); ?>
-            <?php echo form_open('systems/login/admin'); ?>
                 <h6>Log in</h6>
-                <input class="form-control" type="text" id="email" name="email" placeholder="E-mail address">
-                <input class="form-control" type="password" id="password" name="password" placeholder="Your password">
-                <a href="#" class="forgot">Forgot password?</a>
-                <div class="remember">
-                    <input id="remember-me" type="checkbox">
-                    <label for="remember-me">Remember me</label>
-                </div>
-                <button class="btn-glow primary login" onClick="login()">Log in</button>
+                <input class="form-control" type="text" name="email" placeholder="E-mail address">
+                <input class="form-control" type="password" name="password" placeholder="Your password">
+                <div style="display:block">
+                    <a href="#" class="forgot">Forgot password?</a>
+                    <div class="remember">
+                        <input id="remember-me" type="checkbox">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                </div>    
+                <button class="btn-glow primary login">Log in</button>
+                
             </div>
-            </form>
         </div>
 
-       
+        <?php echo form_close(); ?>
 
         <div class="no-account">
             <p>Don't have an account?</p>
-            <a>Sign up</a>
+            <a href="<?php echo base_url(); ?>users/signup">Sign up</a>
         </div>
     </div>
 
 	<!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="<?php echo base_url(); ?>application/views/b3/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>application/views/b3/js/theme.js"></script>
-    <script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/theme.js"></script>
 
-     function login() {
+    <!-- pre load bg imgs -->
+    <script type="text/javascript">
+        $(function () {
+            // bg switcher
+            var $btns = $(".bg-switch .bg");
+            $btns.click(function (e) {
+                e.preventDefault();
+                $btns.removeClass("active");
+                $(this).addClass("active");
+                var bg = $(this).data("img");
 
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
+                $("html").css("background-image", "url('http://survivallife.com/wp-content/uploads/2015/02/1-Child-safe.jpg')");
+            });
 
-        
-
-         $.post( "<?php echo base_url(); ?>/cert/system/call/login/get", function( data ) {
-                alert(data);
-         });
-     }
-
+        });
     </script>
-
-    
 </body>
 </html>

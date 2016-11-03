@@ -22,7 +22,7 @@
          </svg>
         </label>
       <input id="username" class='lf--input' name="email" placeholder='Email' type='text'>
-      <input type="hidden" name="steps" value="1">
+      
     </div>
     <input class='lf--submit' type='submit' value='Next'>
     <?php echo form_close(); ?>

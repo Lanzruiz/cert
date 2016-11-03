@@ -34,7 +34,7 @@
 
     <div class="login-wrapper">
         <a href="index.html">
-            <img class="logo" src="<?php echo base_url(); ?>application/views/b3/img/logo-white.png" alt="logo" />
+            <img class="logo" src="<?php echo base_url(); ?>application/views/b3/img/logo-white2.png" alt="logo" />
         </a>
 
         <div class="box">
@@ -44,12 +44,15 @@
                 <h6>Log in</h6>
                 <input class="form-control" type="text" name="email" placeholder="E-mail address">
                 <input class="form-control" type="password" name="password" placeholder="Your password">
-                <a href="#" class="forgot">Forgot password?</a>
-                <div class="remember">
-                    <input id="remember-me" type="checkbox">
-                    <label for="remember-me">Remember me</label>
-                </div>
+                <div style="display:block">
+                    <a href="#" class="forgot">Forgot password?</a>
+                    <div class="remember">
+                        <input id="remember-me" type="checkbox">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                </div>    
                 <button class="btn-glow primary login">Log in</button>
+                
             </div>
         </div>
 
@@ -77,7 +80,7 @@
                 $(this).addClass("active");
                 var bg = $(this).data("img");
 
-                $("html").css("background-image", "url('<?php echo base_url(); ?>application/views/b3/img/bgs/" + bg + "')");
+                $("html").css("background-image", "url('http://survivallife.com/wp-content/uploads/2015/02/1-Child-safe.jpg')");
             });
 
         });

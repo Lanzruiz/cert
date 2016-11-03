@@ -1,6 +1,6 @@
 
 
-	<section id="fh5co-home" data-section="home" style="background-color: #118dc6;">
+	<section id="fh5co-home" data-section="home" style="background-image: url(http://survivallife.com/wp-content/uploads/2015/02/1-Child-safe.jpg);">
 		<div class="gradient"></div>
 		<div class="container">
 			<div class="text-wrap">
@@ -85,6 +85,14 @@
 		</div>
 	</section>
 	<section id="fh5co-testimony" data-section="testimony">
+	   <div class="container">
+			<div class="row">
+				<div class="col-md-12 section-heading text-center">
+					<h2 class="to-animate">They Describe Us!</h2>
+					
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 to-animate">

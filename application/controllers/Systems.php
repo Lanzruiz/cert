@@ -28,6 +28,14 @@ class Systems extends CI_Controller {
 
 		$this->load->model('users_model');
 
+        $this->load->model('pages_model');
+
+        $this->load->model('teams_model');
+
+         $this->load->model('admins_model');
+
+        $this->load->helper('date');
+
 	}
 
 	public function process($group, $process) {
@@ -61,7 +69,7 @@ class Systems extends CI_Controller {
         	      	    $email     = $this->input->post('email');
         	      	    $password  = $this->input->post('password');
 
-        	      	    if ($email == '' || $password == '') {
+        	      	    if($this->form_validation->run() == FALSE) {
                               
                             $this->load->view('b3/signin.php');
         	      	    }
@@ -77,9 +85,11 @@ class Systems extends CI_Controller {
 
         	      	    	 if($this->users_model->login($data) == true ) {
 
+
+
         	      	    	 	$this->session->set_userdata('session_data', $data);
 
-        	      	    	 	redirect('users/pages/dashboard', 'refresh');
+        	      	    	 	redirect('users/', 'refresh');
 
         	      	    	 }	
 
@@ -98,47 +108,131 @@ class Systems extends CI_Controller {
 
                      //first step
 
-                       if($_POST['steps'] == '1' ) {
+                       if($this->input->post('steps') == '1' ) {
 
-                          $email = $this->input->post('email');
+                            $email = $this->input->post('email');
 
-                          $this->load->view('syrena/step2.signup.php');
+
+                            if($this->users_model->find($email) == TRUE) {
+
+                                 
+                                $data = array(
+                                     
+                                     'email'  => $email 
+
+                                );
+
+                                $this->load->view('b3/emailexist.php', $data);
+
+                            }
+                            else {
+
+                                $data = array(
+                                     
+                                     'email'  => $email 
+
+                                );
+
+                                $this->load->view('todo/user.details.php', $data);
+
+                            }
+                   
+
+                           
 
 
                        }
                        else {
+ 
+                           
+                           
 
 
+                           
+                            
 
-                         //second step
+                            $this->form_validation->set_rules('email', 'Email', 'required');
 
-                            $email       = $this->input->post('email');
-                            $password    = $this->input->post('password');
-                            $repassword  = $this->input->post('repassword');
+                            $this->form_validation->set_rules('password', 'Password', 'required');
 
-                            if ($email == '' || $password == '' || $password != $repassword) {
+                            $this->form_validation->set_rules('firstname', 'First Name', 'required');
+
+                            $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
+
+                            $this->form_validation->set_rules('lastname', 'Last Name', 'required');
+
+                            $this->form_validation->set_rules('team', 'Team Name', 'required');
+
+                            $this->form_validation->set_rules('code', 'Code', 'required');
+
+                            $this->form_validation->set_rules('position', 'Position', 'required');
+
+
+                            if($this->form_validation->run() == FALSE) {
                                 
-                                  $this->load->view('b3/signup.php');
+ 
+                               //   $data['email']     = $this->input->post('email');
+                             //     $data['password']  = $this->input->post('password');
+                              //    $data['fname']     = $this->input->post('fname');
+                             //     $data['lname']     = $this->input->post('lname');
+                             //     $data['team']      = $this->input->post('team');
+                             //     $data['code']      = $this->input->post('code');
+
+                              //    $this->load->view('todo/user.details.correction.php', $data);
+
+                               echo "faild2";
+                            
                             } 
                             else {
+
+                                date_default_timezone_set('Asia/Jakarta');
 
                                 $data = array(
                
 
-                                    'user_email'     => $email,
-                                    'user_password'  => md5($password)
+                                    'user_email'     => $this->input->post('email'),
+                                    'user_password'  => md5($this->input->post('password')),
+                                    'firstname'      => $this->input->post('firstname'),
+                                    'middlename'     => $this->input->post('middlename'),
+                                    'lastname'       => $this->input->post('lastname'),
+                                    'team'           => $this->input->post('team'),
+                                    'code'           => $this->input->post('code'),
+                                    'position'       => $this->input->post('position'),
+                                    'date_created'   => date('Y-m-d H:i:s')
 
                                  );
 
                                 if($this->users_model->register($data) == true ) {
 
                                 	//redirect('/user/pages/dashboard', 'refresh');
-                                     
-                                    $this->load->view('b3/user.dashboard.php'); 
 
-                                	//echo 'success';
+                                    $this->session->set_userdata('session_data', $data);
 
-                                	$this->session->set_userdata('session_data', $data);
+                                    $default = $this->pages_model->get_admin_defualt();
+
+                                    $community_id = $this->teams_model->get_id($data);
+
+                                    foreach($default as $result) {
+
+
+                                            $data = array(
+                                                 
+                                                 'name'         => $result->name,
+                                                 'content'      => $result->content,
+                                                 'community_id' => $community_id,
+                                                 'editable'     => $result->editable
+
+                                            );
+
+                                            $this->pages_model->set_defualt($data);
+
+                                      }      
+
+                                    echo "affirmative";
+
+                                	
+
+                                	
                                 }
                                 else {
 
@@ -154,6 +248,178 @@ class Systems extends CI_Controller {
 
                         
                }
+
+            break;
+
+            case 'admin' :
+
+                 Switch($process) {
+
+
+                      case 'login' :
+
+                          $this->form_validation->set_rules('email', 'Email', 'required');
+                          $this->form_validation->set_rules('password', 'Password', 'required');
+
+                          $email     = $this->input->post('email');
+                          $password  = $this->input->post('password');
+
+                          if($this->form_validation->run() == FALSE) {
+                              
+                            $this->load->view('b3/admin.signin.php');
+                          }
+                          else {
+
+                             $data = array(
+           
+
+                                'email'     => $this->input->post('email'),
+                                'password'  => $this->input->post('password')
+
+                             );
+
+                              if($this->admins_model->login($data) == true ) {
+
+
+
+                                $this->session->set_userdata('session_data', $data);
+
+                                redirect('admin/', 'refresh');
+
+                               }  else {
+
+                                  redirect('users/admin.signin', 'refresh');
+
+                               }
+
+                          }     
+
+
+                      break;
+
+
+                      case 'logout' :
+
+                            $this->session->sess_destroy();
+
+                             redirect('admin', 'refresh');
+
+                      break;
+
+                      case 'addadmin' :
+
+                            $this->form_validation->set_rules('email', 'Email', 'required');
+
+                            $this->form_validation->set_rules('password', 'Password', 'required');
+
+                            $this->form_validation->set_rules('firstname', 'First Name', 'required');
+
+                            $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
+
+                            $this->form_validation->set_rules('lastname', 'Last Name', 'required');
+
+                            $this->form_validation->set_rules('level', 'Position', 'required'); 
+
+                            if($this->form_validation->run() == FALSE) {
+
+                                echo 'faild to add';
+
+                            }
+                            else {
+
+                                
+                                date_default_timezone_set('Asia/Jakarta');
+
+                                $data = array(
+               
+
+                                    'email'          => $this->input->post('email'),
+                                    'password'       => md5($this->input->post('password')),
+                                    'firstname'      => $this->input->post('firstname'),
+                                    'middlename'     => $this->input->post('middlename'),
+                                    'lastname'       => $this->input->post('lastname'),
+                                    'level'          => $this->input->post('level'),
+                                    'date_created'   => date('Y-m-d H:i:s')
+
+                                 );
+
+                                if($this->admins_model->add($data) == true ) {
+
+
+                                     redirect('/admin/adminlist', 'refresh');
+                                }  
+
+
+                            }  
+
+                      break;
+
+                      case 'addteam' :
+
+
+                            $this->form_validation->set_rules('email', 'Email', 'required');
+
+                            $this->form_validation->set_rules('password', 'Password', 'required');
+
+                            $this->form_validation->set_rules('firstname', 'First Name', 'required');
+
+                            $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
+
+                            $this->form_validation->set_rules('lastname', 'Last Name', 'required');
+
+                            $this->form_validation->set_rules('team', 'Team Name', 'required');
+
+                            $this->form_validation->set_rules('code', 'Code', 'required');
+
+                            $this->form_validation->set_rules('position', 'Position', 'required'); 
+
+                            if($this->form_validation->run() == FALSE) {
+
+                                echo 'faild to add';
+
+                            }
+                            else {
+
+
+                                date_default_timezone_set('Asia/Jakarta');
+
+                                $data = array(
+               
+
+                                    'user_email'     => $this->input->post('email'),
+                                    'user_password'  => md5($this->input->post('password')),
+                                    'firstname'      => $this->input->post('firstname'),
+                                    'middlename'     => $this->input->post('middlename'),
+                                    'lastname'       => $this->input->post('lastname'),
+                                    'team'           => $this->input->post('team'),
+                                    'code'           => $this->input->post('code'),
+                                    'position'       => $this->input->post('position'),
+                                    'date_created'   => date('Y-m-d H:i:s')
+
+                                 );
+
+                                if($this->users_model->register($data) == true ) {
+
+
+                                     redirect('/admin/users', 'refresh');
+                                }   
+
+                            } 
+
+
+                      break;
+
+
+                   } 
+
+
+            break;
+                      
+
+
+              
+
+               
         }
 	}
 

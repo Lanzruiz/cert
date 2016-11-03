@@ -18,44 +18,400 @@ class Admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function __construct() {
+    public function __construct() {
+
 		parent::__construct();
-		$this->load->model(array('users_model'));
+
+		$this->load->model(array('users_model', 'teams_model', 'pages_model', 'admins_model'));
 	}
 
 	public function index()
 	{
-		if(!$this->session->userdata('logged_in')) {
-			$this->load->view('login');
-		} else {
-			$this->load->view('home');
-		}
-	}
-   public function test() {
+		 $session_data = $this->session->userdata('session_data'); 
 
-        	  $this->load->view('b3/admin.dashboard.php');
-      
-	}
+		
 
-	public function login()
-	{
-		if($this->input->post('login')) {
-			$data['username'] = $this->input->post('username');
-			$data['password'] = $this->input->post('password');
-			$auth = $this->users_model->login($data);
-			if($auth==1) {
-				$this->session->set_userdata('logged_in', true);
-				$this->load->view('home');
-			} else {
-				$this->load->view('login');
-			}
-		} else {
-			$this->load->view('login');
-		}
+		 if($session_data != '') {
+
+
+		 	 $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		 	
+
+		 
+
+             
+             $this->load->view('todo/admin.dashboard.php', $data);
+
+		 }
+		 else
+		 {
+		 	 $this->load->view('b3/admin.signin.php');
+		 }
 	}
 
-	public function logout() {
-		$this->session->sess_destroy();
-		$this->load->view('login');
+
+	public function adminlist() {
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email'  => $session_data['email'],
+                 'admin_list'  => $this->admins_model->sort()
+
+		 	 );
+
+		 	 
+          //   $data['team']   =  $this->teams_model->get_name($data);
+
+          //   $data['code']   =  $this->teams_model->get_code($data);
+
+         //    $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+
+
+             
+             $this->load->view('todo/admins.list.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 
 	}
+
+	public function settings() {
+
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		 	 
+             $data['team']   =  $this->teams_model->get_name($data);
+
+             $data['code']   =  $this->teams_model->get_code($data);
+
+             $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+             
+             $this->load->view('todo/admin.settings.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 	 
+
+
+	}
+
+	public function support() {
+
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		
+             
+             $this->load->view('todo/admins.support.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 
+
+	}
+
+	public function adddisasterinfo() {
+
+
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		 	 
+           
+             
+             $this->load->view('todo/admin.adddisasterinfo.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 
+
+	}
+
+
+
+	public function users() {
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'email'     => $session_data['email'],
+                 'userlist'  => $this->teams_model->sort('sort_email')
+
+		 	 );
+
+		 	 
+          //   $data['team']   =  $this->teams_model->get_name($data);
+
+          //   $data['code']   =  $this->teams_model->get_code($data);
+
+         //    $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+             
+             $this->load->view('todo/admin.userslist.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 	 
+	}
+
+	public function addkits() {
+
+
+		  $session_data = $this->session->userdata('session_data'); 
+
+         if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		 	 
+            
+             
+             $this->load->view('todo/admin.addkits.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 
+
+	}
+
+	public function addpage() {
+
+
+		  $session_data = $this->session->userdata('session_data'); 
+
+         if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		 	 
+           
+             
+             $this->load->view('todo/admin.addpage.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 
+
+	}
+
+
+	public function addresources() {
+
+         $session_data = $this->session->userdata('session_data'); 
+
+         if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['email']
+
+		 	 );
+
+		 	 
+           
+             
+             $this->load->view('todo/admin.addresourcesv2.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 
+
+	}
+
+	public function kits() {
+
+
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'email' => $session_data['email']
+
+		 	 );
+
+		 	 
+          //   $data['team']   =  $this->teams_model->get_name($data);
+
+          //   $data['code']   =  $this->teams_model->get_code($data);
+
+         //    $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+             
+             $this->load->view('todo/admin.kits.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 	
+
+	}
+
+	public function pages() {
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'email' => $session_data['email']
+
+		 	 );
+
+		 	 
+          //   $data['team']   =  $this->teams_model->get_name($data);
+
+          //   $data['code']   =  $this->teams_model->get_code($data);
+
+         //    $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+             
+             $this->load->view('todo/admin.pages.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 	 
+	}
+
+	public function menus() {
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'email' => $session_data['email']
+
+		 	 );
+
+		 	 
+          //   $data['team']   =  $this->teams_model->get_name($data);
+
+          //   $data['code']   =  $this->teams_model->get_code($data);
+
+         //    $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+             
+             $this->load->view('todo/admin.menu.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/admin.signin.php');
+
+		 } 	 
+	}
+
+	public function createpage() {
+
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+
+			  $data = array(
+
+                 'user_email' => $session_data['user_email']
+
+		 	 );
+
+		 	 
+             $data['team']   =  $this->teams_model->get_name($data);
+
+             $data['code']   =  $this->teams_model->get_code($data);
+
+             $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+
+
+             $this->load->view('todo/user.createpagev2.php', $data);
+
+	    }
+	    else
+		 {
+		 	 $this->load->view('b3/signin.php');
+
+		 } 		
+
+	}
+
+	public function signup() {
+
+		 $this->load->view('b3/signup.php');
+	}
+
+	public function signin() {
+
+		 $this->load->view('b3/admin.signin.php');
+	}
+
 }

@@ -183,13 +183,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 #fh5co-header .navbar-brand {
   float: left;
-  display: block;
+
   font-size: 24px;
   font-weight: 700;
   padding-left: 0;
   color: #535659;
   text-transform: uppercase;
   letter-spacing: 3px;
+  width: 300px;
+ 
+}
+#fh5co-header .navbar-brand img {
+
+  width: 100%;
+  float: left;
+  margin-top: -13px;
+
 }
 #fh5co-header .navbar-brand > span {
   color: #ff3b30;

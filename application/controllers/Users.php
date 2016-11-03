@@ -19,28 +19,108 @@ class Users extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function __construct() {
+
 		parent::__construct();
-		$this->load->model(array('users_model'));
+
+		$this->load->model(array('users_model', 'teams_model', 'pages_model'));
 	}
 
 	public function index()
 	{
 		 $session_data = $this->session->userdata('session_data'); 
 
+		
+
 		 if($session_data != '') {
 
-             $this->load->view('syrena/user.dashboard.php');
+
+		 	 $data = array(
+
+                 'user_email' => $session_data['user_email']
+
+		 	 );
+
+		 	
+
+		 	 
+             $data['team'] = $this->teams_model->get_name($data);
+
+             $data['code'] = $this->teams_model->get_code($data);
+
+             
+             $this->load->view('todo/user.dashboard.php', $data);
 
 		 }
 		 else
 		 {
-		 	 $this->load->view('login-form/login.php');
+		 	 $this->load->view('b3/signin.php');
 		 }
+	}
+
+	public function pages() {
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['user_email']
+
+		 	 );
+
+		 	 
+             $data['team']   =  $this->teams_model->get_name($data);
+
+             $data['code']   =  $this->teams_model->get_code($data);
+
+             $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+             
+             $this->load->view('todo/user.pages-temp.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 	 
+	}
+
+	public function createpage() {
+
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+
+			  $data = array(
+
+                 'user_email' => $session_data['user_email']
+
+		 	 );
+
+		 	 
+             $data['team']   =  $this->teams_model->get_name($data);
+
+             $data['code']   =  $this->teams_model->get_code($data);
+
+             $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+
+
+             $this->load->view('todo/user.createpagev2.php', $data);
+
+	    }
+	    else
+		 {
+		 	 $this->load->view('b3/signin.php');
+
+		 } 		
+
 	}
 
 	public function signup() {
 
-		 $this->load->view('login-form/signup.php');
+		 $this->load->view('b3/signup.php');
 	}
 
 	public function signin() {
@@ -48,80 +128,7 @@ class Users extends CI_Controller {
 		 $this->load->view('b3/signin.php');
 	}
 
-	public function pages($pages)
-	{
-
-		  $session_data = $this->session->userdata('session_data'); 
-
-		  if($session_data != '') {
-
-              Switch($pages) {
-
-              	   case 'dashboard' :
-
-              	       $this->load->view('syrena/user.dashboard.php');
-              	       break;
-
-              	   case 'profile' :
-
-              	       $this->load->view('syrena/user.profile.php');
-              	       break;
-
-              	   case 'list' :
-              	   
-              	       $this->load->view('syrena/user.pages.php');
-              	       break;
-
-              	    case 'new' :
-              	    
-              	       $this->load->view('syrena/user.new-page.php');      
-                       break;
-
-                    case 'categories':
-                    
-                       $this->load->view('syrena/user.categories.php');
-                       break;  
-
-                    case 'newcategory' :
-                    
-                       $this->load->view('syrena/user.new-categories.php');
-                       break;   
-
-                    case 'kits' :
-                    
-                        $this->load->view('syrena/user.kits.php');
-                        break;   
-
-                    case 'newkits' :
-                        
-                        $this->load->view('syrena/user.new-kits.php');
-                        break; 
-
-                    case 'preview' :
-                    
-                         $this->load->view('syrena/user.app-preview.php');
-                         break;       
-              	   
-              	   case 'addpreparednessinfo' :
-              	   
-              	       $this->load->view('b3/user.new-preparedness.php');
-              	       break;
-
-              	   case 'preparednessinfo' :
-              	   
-              	       $this->load->view('b3/user.list-preparedness.php');
-              	       break;        
-
-
-              }
-		  }
-		  else {
-
-		  	  $this->load->view('b3/signin.php');
-
-
-		  }
-	}
+	
 
 	
 
