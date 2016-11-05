@@ -85,27 +85,22 @@
                 </a>
               </li>
               !-->
-                <li class="active">
+                <li>
                 <a href="<?php echo base_url(); ?>/admin/kits">
                   <i class="icon-briefcase"></i>
-                  <span>Kits & Resources</span>
+                  <span>Disaster & Kits</span>
                 </a>
               </li>
-              <li>
-                <a href="notes.html">
-                  <i class="icon-pencil"></i>
-                  <span>Instructions</span>
-                </a>
-              </li>
+             
                <li>
-                <a href="notes.html">
+                <a href="<?php echo base_url(); ?>/admin/support">
                   <i class="icon-comment"></i>
                   <span>Tickets</span>
                   <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="timeline.html">
+              <li class="active">
+                <a href="#">
                   <i class="icon-gears"></i>
                   <span>Settings</span>
                 </a>

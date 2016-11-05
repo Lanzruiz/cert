@@ -96,7 +96,7 @@
                
               </li>              
              
-               <li class="active">
+               <li>
                 <a href="<?php echo base_url(); ?>/admin/pages/">
                   <i class="icon-file-text"></i>
                   <span>Pages</span>
@@ -120,13 +120,13 @@
                 </a>
               </li>
               !-->
-               <li>
+              <li class="active">
                 <a href="<?php echo base_url(); ?>/admin/kits">
                   <i class="icon-briefcase"></i>
                   <span>Disaster & Kits</span>
                 </a>
               </li>
-            
+              
               <li>
                 <a href="<?php echo base_url(); ?>/admin/support">
                   <i class="icon-comment"></i>
@@ -243,13 +243,13 @@
             <header class="header">
               <div class="row b-b">
                 <div class="col-sm-4">
-                  <h3 class="m-t m-b-none">Pages</h3>
+                  <h3 class="m-t m-b-none">Kits and Resources</h3>
                   <p class="block text-muted">Welcome to application</p>
                 </div>
                 <div class="col-sm-8">
                   <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
-                    <div class="pull-left">                  
-                      <a href="<?php echo base_url(); ?>/admin/addpage" class="btn btn-s-md btn-success">Create Page</a>
+                    <div class="pull-left">    
+
                     </div>
                    
                   </div>
@@ -265,32 +265,35 @@
                       <section class="vbox">
                         <header class="header bg-light dk">
                           <ul class="nav nav-tabs">
-                            <li class="active"><a href="#active" data-toggle="tab">Active Pages</a></li>
-                            <li class=""><a href="#draft" data-toggle="tab">Drafts</a></li>
-                            <li class=""><a href="#trash" data-toggle="tab">Trash</a></li>
+                           
+                            <li class=""><a href="#kits" data-toggle="tab">Kits</a></li>
+                            <li class="active"><a href="#resources" data-toggle="tab">Resources</a></li>
+                            <li class=""><a href="#disaster" data-toggle="tab">Disaster Info</a></li>
                            
                           </ul>
                         </header>
                         <section class="scrollable">
                           <div class="tab-content">
-                            <div class="tab-pane active" id="active">
+                            
+                            <div class="tab-pane" id="kits">
                                 <!-- table !-->
                                    <section class="panel">
                                       
                                       <div class="row text-sm wrapper">
                                         <div class="col-sm-9 m-b-xs">
-                                          <select class="input-sm form-control input-s-sm inline">
-                                            <option value="0">Bulk action</option>
-                                            <option value="1">Delete selected</option>
-                                            <option value="2">Bulk edit</option>
-                                            <option value="3">Export</option>
+                                          <select class="input-sm form-control input-s-sm inline" id="process">
+                                            <option value="0">Create New</option>
+                                            <option value="1">Bulk action</option>
+                                            <option value="2">Delete selected</option>
+                                            <option value="3">Bulk edit</option>
+                                            
                                           </select>
-                                          <button class="btn btn-sm btn-white">Apply</button>                
+                                          <button class="btn btn-sm btn-white" onclick="addkits()">Apply</button>                
                                         </div>
 
                                         <div class="col-sm-3">
                                           <div class="input-group">
-                                            <input type="text" class="input-sm form-control" id="search_activepage" placeholder="Search">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
                                             <span class="input-group-btn">
                                               <button class="btn btn-sm btn-white" type="button">Go!</button>
                                             </span>
@@ -298,399 +301,29 @@
                                         </div>
                                       </div>
                                       <div class="table-responsive">
-                                        <table class="table table-striped b-t text-sm" id="table_active">
-                                          <thead>
-                                            <tr>
-                                              <th width="20"><input type="checkbox"></th>
-                                              <th class="th-sortable" data-toggle="class">Page Name
-                                               
-                                              </th>
-                                              <th>Status</th>
-                                              <th>Date Publish</th>
-                                              <th width="30"></th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="2"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 25, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="3"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 22, 2013</td>
-                                              <td>
-                                                <a href="#" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Avatar system</td>
-                                              <td>15c</td>
-                                              <td>Jul 15, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Throwdown</td>
-                                              <td>4c</td>
-                                              <td>Jul 11, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="5"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 7, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="6"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 3, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="7"></td>
-                                              <td>Avatar system </td>
-                                              <td>15c</td>
-                                              <td>Jul 2, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </div>
-                                      <footer class="panel-footer">
-                                        <div class="row">
-                                          <div class="col-sm-4 hidden-xs">
-                                            <select class="input-sm form-control input-s-sm inline">
-                                              <option value="0">Bulk action</option>
-                                              <option value="1">Delete selected</option>
-                                              <option value="2">Bulk edit</option>
-                                              <option value="3">Export</option>
-                                            </select>
-                                            <button class="btn btn-sm btn-white">Apply</button>                  
-                                          </div>
-                                          <div class="col-sm-4 text-center">
-                                            <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-                                          </div>
-                                          <!--
-                                          <div class="col-sm-4 text-right text-center-xs">                
-                                            <ul class="pagination pagination-sm m-t-none m-b-none">
-                                              <li><a href="#"><i class="icon-chevron-left"></i></a></li>
-                                              <li><a href="#">1</a></li>
-                                              <li><a href="#">2</a></li>
-                                              <li><a href="#">3</a></li>
-                                              <li><a href="#">4</a></li>
-                                              <li><a href="#">5</a></li>
-                                              <li><a href="#"><i class="icon-chevron-right"></i></a></li>
-                                            </ul>
-                                          </div>
-                                          !-->
-
-                                        </div>
-                                      </footer>
-                                    </section>
-                                <!-- table !-->
-                            </div>
-                            <div class="tab-pane" id="draft">
-                                <!-- table !-->
-                                   <section class="panel">
-                                      
-                                      <div class="row text-sm wrapper">
-                                        <div class="col-sm-9 m-b-xs">
-                                          <select class="input-sm form-control input-s-sm inline">
-                                            <option value="0">Bulk action</option>
-                                            <option value="1">Delete selected</option>
-                                            <option value="2">Bulk edit</option>
-                                            <option value="3">Export</option>
-                                          </select>
-                                          <button class="btn btn-sm btn-white">Apply</button>                
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                          <div class="input-group">
-                                            <input type="text" class="input-sm form-control" id="search_draft" placeholder="Search">
-                                            <span class="input-group-btn">
-                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                        <table class="table table-striped b-t text-sm" id="table_draft">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
                                           <thead>
                                             <tr>
                                               <th width="20" style="width: 2px !important"><input type="checkbox"></th>
-                                              <th class="th-sortable" data-toggle="class">Page Name
+                                              <th class="th-sortable" data-toggle="class">Kits Name
                                                
                                               </th>
-                                              <th>Status</th>
+                                              <th>Resources</th>
                                               <th>Date Created</th>
-                                              <th width="30"></th>
+                                              <th width="30">Status</th>
                                             </tr>
                                           </thead>
                                           <tbody>
                                             <tr>
                                               <td><input type="checkbox" name="post[]" value="2"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
+                                              <td>Water Tank</td>
+                                              <td>4</td>
                                               <td>Jul 25, 2013</td>
                                               <td>
                                                 <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
                                               </td>
                                             </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="3"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 22, 2013</td>
-                                              <td>
-                                                <a href="#" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Avatar system</td>
-                                              <td>15c</td>
-                                              <td>Jul 15, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Throwdown</td>
-                                              <td>4c</td>
-                                              <td>Jul 11, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="5"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 7, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="6"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 3, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="7"></td>
-                                              <td>Avatar system </td>
-                                              <td>15c</td>
-                                              <td>Jul 2, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
+                                          
                                           </tbody>
                                         </table>
                                       </div>
@@ -727,24 +360,25 @@
                                 <!-- table !-->
                             </div>
                                                      
-                            <div class="tab-pane" id="trash">
+                            <div class="tab-pane active" id="resources">
                                 <!-- table !-->
                                    <section class="panel">
                                       
                                       <div class="row text-sm wrapper">
                                         <div class="col-sm-9 m-b-xs">
-                                          <select class="input-sm form-control input-s-sm inline">
-                                            <option value="0">Bulk action</option>
-                                            <option value="1">Delete selected</option>
-                                            <option value="2">Bulk edit</option>
-                                            <option value="3">Export</option>
+                                          <select class="input-sm form-control input-s-sm inline" id="process">
+                                            <option value="0">Create New</option>
+                                            <option value="1">Bulk action</option>
+                                            <option value="2">Delete selected</option>
+                                            <option value="3">Bulk edit</option>
+                                            
                                           </select>
-                                          <button class="btn btn-sm btn-white">Apply</button>                
+                                          <button class="btn btn-sm btn-white" onclick="addresources()">Apply</button>                    
                                         </div>
 
                                         <div class="col-sm-3">
                                           <div class="input-group">
-                                            <input type="text" class="input-sm form-control" id="search_trash" placeholder="Search">
+                                            <input type="text" class="input-sm form-control" id="search_resources" placeholder="Search">
                                             <span class="input-group-btn">
                                               <button class="btn btn-sm btn-white" type="button">Go!</button>
                                             </span>
@@ -752,20 +386,16 @@
                                         </div>
                                       </div>
                                       <div class="table-responsive">
-                                        <table class="table table-striped b-t text-sm" id="table_trash">
+                                        <table class="table table-striped b-t text-sm" id="table_resources">
                                           <thead>
                                             <tr>
                                               <th width="20"><input type="checkbox"></th>
-                                              <th class="th-sortable" data-toggle="class">Page Name
-                                                <span class="th-sort">
-                                                  <i class="icon-sort-down text"></i>
-                                                  <i class="icon-sort-up text-active"></i>
-                                                  <i class="icon-sort"></i>
-                                                </span>
+                                              <th class="th-sortable" data-toggle="class">Resources Name
+                                                
                                               </th>
-                                              <th>Status</th>
-                                              <th>Date Trash</th>
-                                              <th width="30"></th>
+                                              <th>Availability</th>
+                                              <th>Date Created</th>
+                                              <th width="30">Status</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -841,6 +471,90 @@
                                                 <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
                                               </td>
                                             </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                      <footer class="panel-footer">
+                                        <div class="row">
+                                          <div class="col-sm-4 hidden-xs">
+                                            <select class="input-sm form-control input-s-sm inline">
+                                              <option value="0">Bulk action</option>
+                                              <option value="1">Delete selected</option>
+                                              <option value="2">Bulk edit</option>
+                                              <option value="3">Export</option>
+                                            </select>
+                                            <button class="btn btn-sm btn-white">Apply</button>                  
+                                          </div>
+                                          <div class="col-sm-4 text-center">
+                                            <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+                                          </div>
+                                          <!--
+                                          <div class="col-sm-4 text-right text-center-xs">                
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                              <li><a href="#"><i class="icon-chevron-left"></i></a></li>
+                                              <li><a href="#">1</a></li>
+                                              <li><a href="#">2</a></li>
+                                              <li><a href="#">3</a></li>
+                                              <li><a href="#">4</a></li>
+                                              <li><a href="#">5</a></li>
+                                              <li><a href="#"><i class="icon-chevron-right"></i></a></li>
+                                            </ul>
+                                          </div>
+                                          !-->
+                                        </div>
+                                      </footer>
+                                    </section>
+                                <!-- table !-->
+                            </div>
+                             <div class="tab-pane" id="disaster">
+                                <!-- table !-->
+                                   <section class="panel">
+                                      
+                                      <div class="row text-sm wrapper">
+                                        <div class="col-sm-9 m-b-xs">
+                                          <select class="input-sm form-control input-s-sm inline" id="process">
+                                            <option value="0">Create New</option>
+                                            <option value="1">Bulk action</option>
+                                            <option value="2">Delete selected</option>
+                                            <option value="3">Bulk edit</option>
+                                            
+                                          </select>
+                                          <button class="btn btn-sm btn-white" onclick="adddisasterinfo()">Apply</button>                    
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_disasterinfo" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_disaster">
+                                          <thead>
+                                            <tr>
+                                              <th width="20"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Disaster Name
+                                                
+                                              </th>
+                                            
+                                              <th>Date Created</th>
+                                              <th width="30">Status</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td><input type="checkbox" name="post[]" value="2"></td>
+                                              <td>Idrawfast</td>
+                                             
+                                              <td>Jul 25, 2013</td>
+                                              <td>
+                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
+                                              </td>
+                                            </tr>
+                                           
                                           </tbody>
                                         </table>
                                       </div>
@@ -892,6 +606,10 @@
     </section>
     <!-- /.vbox -->
   </section>
+
+
+  
+
 	<script src="<?php echo base_url(); ?>application/views/todo/js/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/bootstrap.js"></script>
@@ -924,10 +642,55 @@
   <script>
 
     $(document).ready(function(){
-    $('#table_active').DataTable();
-    $('#table_draft').DataTable();
-    $('#table_trash').DataTable();
+    $('#table_kits').DataTable();
+    $('#table_resources').DataTable();
+     $('#table_disaster').DataTable();
+ 
+
+   
 });
+
+    function addkits() {
+
+       
+
+       var e = document.getElementById("process");
+       var strUser = e.options[e.selectedIndex].value;
+ 
+
+      
+
+       if(strUser == 0) {
+
+          window.location = "<?php echo base_url(); ?>/admin/addkits";
+       }
+    }
+
+    function addresources() {
+
+       var e = document.getElementById("process");
+       var strUser = e.options[e.selectedIndex].value;
+ 
+
+      if(strUser == 0) {
+
+          window.location = "<?php echo base_url(); ?>/admin/addresources";
+       }
+
+    }
+
+      function adddisasterinfo() {
+
+       var e = document.getElementById("process");
+       var strUser = e.options[e.selectedIndex].value;
+ 
+
+      if(strUser == 0) {
+
+          window.location = "<?php echo base_url(); ?>/admin/adddisasterinfo";
+       }
+
+    }
 
 </script>
 

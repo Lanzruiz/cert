@@ -121,21 +121,21 @@
               </li>
               !-->
               <li class="active">
-                <a href="tasks.html">
+                <a href="<?php echo base_url(); ?>/admin/kits">
                   <i class="icon-briefcase"></i>
                   <span>Disaster & Kits</span>
                 </a>
               </li>
               
               <li>
-                <a href="notes.html">
+                <a href="<?php echo base_url(); ?>/admin/support">
                   <i class="icon-comment"></i>
                   <span>Tickets</span>
                   <span>(900)</span>
                 </a>
               </li>
               <li>
-                <a href="timeline.html">
+                <a href="<?php echo base_url(); ?>/admin/settings">
                   <i class="icon-gears"></i>
                   <span>Settings</span>
                 </a>

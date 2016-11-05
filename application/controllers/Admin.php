@@ -87,6 +87,39 @@ class Admin extends CI_Controller {
 		 } 
 	}
 
+
+	public function resources() {
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email'  => $session_data['email'],
+                 'admin_list'  => $this->admins_model->sort()
+
+		 	 );
+
+		 	 
+          //   $data['team']   =  $this->teams_model->get_name($data);
+
+          //   $data['code']   =  $this->teams_model->get_code($data);
+
+         //    $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+
+
+             
+             $this->load->view('todo/admin.resources.php', $data);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 
+	}
+
 	public function settings() {
 
         $session_data = $this->session->userdata('session_data'); 

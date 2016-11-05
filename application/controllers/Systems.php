@@ -28,13 +28,15 @@ class Systems extends CI_Controller {
 
 		$this->load->model('users_model');
 
-        $this->load->model('pages_model');
+    $this->load->model('pages_model');
 
-        $this->load->model('teams_model');
+    $this->load->model('teams_model');
 
-         $this->load->model('admins_model');
+    $this->load->model('admins_model');
 
-        $this->load->helper('date');
+    $this->load->model('resources_model');
+
+    $this->load->helper('date');
 
 	}
 
@@ -408,6 +410,119 @@ class Systems extends CI_Controller {
 
 
                       break;
+
+                      case 'addresources' :
+
+                            $this->form_validation->set_rules('name', 'Name', 'required');
+
+                            $this->form_validation->set_rules('description', 'Description', 'required');
+
+                            $this->form_validation->set_rules('quantity', 'Quantity', 'required');
+
+                            $images = " ";
+
+                            if($this->form_validation->run() == FALSE) {
+
+                                echo 'faild to add';
+
+                            }
+                            else {
+
+
+                                  $target_dir = "uploads/";
+                                  $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                                  $uploadOk = 1;
+                                  $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                                  // Check if image file is a actual image or fake image
+                                  if(isset($_POST["submit"])) {
+
+                                      $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+
+                                     if($check !== false) {
+
+                                       echo "File is an image - " . $check["mime"] . ".";
+                                       $uploadOk = 1;
+
+                                     } else {
+
+                                       echo "File is not an image.";
+                                       $uploadOk = 0;
+                                     }
+                                  }
+
+                                  // Check if file already exists
+                                  if (file_exists($target_file)) {
+
+                                     echo "Sorry, file already exists.";
+                                     $uploadOk = 0;
+                                   }
+
+                                   // Check file size
+                                  if ($_FILES["image"]["size"] > 5000000000) {
+
+                                     echo "Sorry, your file is too large.";
+                                     $uploadOk = 0;
+                                   }
+
+                                   // Allow certain file formats
+                                   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                                     && $imageFileType != "gif" ) {
+                                        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                                        $uploadOk = 0;
+                                    }
+
+                               // Check if $uploadOk is set to 0 by an error
+                                   if ($uploadOk == 0) {
+                                       echo "Sorry, your file was not uploaded.";
+                                       // if everything is ok, try to upload file
+                                   } else {
+
+                                        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                        //echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+
+                                       $images = '/uploads/'. basename( $_FILES["image"]["name"]);
+
+                     
+
+
+
+                                         } else {
+
+                                         echo "Sorry, there was an error uploading your file.";
+
+                                         }
+
+                                    }
+
+
+                                date_default_timezone_set('Asia/Jakarta');
+
+                                $data = array(
+               
+
+                                    'name'           => $this->input->post('name'),
+                                    'description'    => $this->input->post('password'),
+                                    'image_url'      => $images,
+                                    'availabilty'    => $this->input->post('availability'),
+                                    'date_created'   => date('Y-m-d H:i:s'),
+                                    'status'         => 1,
+                                    'community_id'   => 00000
+                                   
+                                 );
+
+                                if($this->resources_model->add($data) == true ) {
+
+
+                                     redirect('/admin/resources', 'refresh');
+                                }   
+
+                            } 
+
+                      break;
+
+
+
+
 
 
                    } 

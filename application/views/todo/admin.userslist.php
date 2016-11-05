@@ -240,7 +240,7 @@
             <header class="header">
               <div class="row b-b">
                 <div class="col-sm-4">
-                  <h3 class="m-t m-b-none">User Response Team</h3>
+                  <h4 class="m-t m-b-none">Emergency Preparedness Group</h4>
                   <p class="block text-muted">Response Team people</p>
                 </div>
                 <div class="col-sm-8">

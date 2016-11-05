@@ -126,14 +126,14 @@
               </li>
              
               <li class="active">
-                <a href="notes.html">
+                <a href="#">
                   <i class="icon-comment"></i>
                   <span>Tickets</span>
                   <span>(900)</span>
                 </a>
               </li>
               <li>
-                <a href="timeline.html">
+                <a href="<?php echo base_url(); ?>/admin/settings">
                   <i class="icon-gears"></i>
                   <span>Settings</span>
                 </a>
@@ -245,9 +245,7 @@
                 </div>
                 <div class="col-sm-8">
                   <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
-                    <div class="pull-left">                  
-                      <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" data-target="#createAdmin">Create Admin</a>
-                    </div>
+                   
                    
                   </div>
                 </div>

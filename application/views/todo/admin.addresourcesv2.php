@@ -121,21 +121,16 @@
                   <span>Kits & Resources</span>
                 </a>
               </li>
-              <li>
-                <a href="notes.html">
-                  <i class="icon-pencil"></i>
-                  <span>Instructions</span>
-                </a>
-              </li>
+              
                <li>
-                <a href="notes.html">
+                <a href="<?php echo base_url(); ?>/admin/support">
                   <i class="icon-comment"></i>
                   <span>Tickets</span>
                   <span>(900)</span>
                 </a>
               </li>
               <li>
-                <a href="timeline.html">
+                <a href="<?php echo base_url(); ?>/admin/settings">
                   <i class="icon-gears"></i>
                   <span>Settings</span>
                 </a>
@@ -274,11 +269,11 @@
                   </ul>
                 </div>
                 <div class="step-content">
-                   <?php echo form_open('systems/process/user/signup?steps=2'); ?>
+                   <?php echo form_open_multipart('systems/process/admin/addresources'); ?>
                     <div class="step-pane active margin-top-20" id="step1">
 
                       <p>Resources Name*</p>
-                      <input type="text" class="form-control" id="email" name="email" data-trigger="change">
+                      <input type="text" class="form-control"  name="name" data-trigger="change">
 
                      
 
@@ -291,6 +286,8 @@
                      <div class="step-pane margin-top-20" id="step2">
                  
                          <p>Description</p>
+
+                         <!--
                     
                         <div class="btn-toolbar m-b-sm btn-editor" data-role="editor-toolbar" data-target="#editor">
                           <div class="btn-group">
@@ -346,9 +343,11 @@
                             <a class="btn btn-white btn-sm" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
                           </div>
                           <input type="text" class="form-control-trans pull-left" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" style="width: 25px; height: 400px; display: none;">
-                        </div>
-                        <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
-                        </div>
+                        </div> !-->
+                      <!--  <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
+                        </div> !-->
+
+                      <textarea id="editor" name="description" style="overflow:scroll; width: 100%; height:150px;max-height:150px" contenteditable="true"></textarea>
 
 
                         <section class="panel text-sm doc-buttons" style="margin-top: 20px">
@@ -368,10 +367,10 @@
                     <div class="step-pane" id="step3">
                       <p class="margin-top-20">Quantity*</p>
 
-                      <input type="text" class="form-control" name="team" id="team" data-trigger="change" placeholder="Type the information">
+                      <input type="text" class="form-control" name="availability" id="team" data-trigger="change" placeholder="Type the information">
 
                       <p class="margin-top-20">Website(Optional)</p>
-                      <input type="text" class="form-control" id="code" data-trigger="change"  placeholder="Type the information">
+                      <input type="text" class="form-control" id="code" name="website" data-trigger="change"  placeholder="Type the information">
 
                      
                        
