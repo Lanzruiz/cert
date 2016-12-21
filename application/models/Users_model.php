@@ -2,6 +2,46 @@
 class Users_model extends CI_Model {
 	
 
+    public function getdetails($data) {
+
+         $condition = "user_email =" . "'" . $data['user_email'] . "'";
+
+         $this->db->select('*');
+         $this->db->from('tbl_user_login');
+         $this->db->where($condition);
+         $query = $this->db->get();
+         $ret = $query->row();
+
+         $conditioninfo = "user_id =" . "'" . $ret->user_id . "'";
+
+
+         $this->db->select('*');
+         $this->db->from('tbl_user_info');
+         $this->db->where($conditioninfo);
+         $query = $this->db->get();
+    
+
+         $ret = $query->row();
+
+         return $ret->first_name;
+    }
+
+    public function get_id($data) {
+  
+         $condition = "user_email =" . "'" . $data['user_email'] . "'";
+
+         $this->db->select('*');
+         $this->db->from('tbl_user_login');
+         $this->db->where($condition);
+         $query = $this->db->get();
+    
+    
+
+         $ret = $query->row();
+
+         return $ret->user_id;
+
+    }
 
 	public function register($data) {
 

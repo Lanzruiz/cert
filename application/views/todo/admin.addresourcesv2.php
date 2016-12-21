@@ -273,7 +273,7 @@
                     <div class="step-pane active margin-top-20" id="step1">
 
                       <p>Resources Name*</p>
-                      <input type="text" class="form-control"  name="name" data-trigger="change">
+                      <input type="text" class="form-control" id="resourcesname"  name="name" data-trigger="change">
 
                      
 
@@ -287,7 +287,6 @@
                  
                          <p>Description</p>
 
-                         <!--
                     
                         <div class="btn-toolbar m-b-sm btn-editor" data-role="editor-toolbar" data-target="#editor">
                           <div class="btn-group">
@@ -343,21 +342,18 @@
                             <a class="btn btn-white btn-sm" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
                           </div>
                           <input type="text" class="form-control-trans pull-left" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" style="width: 25px; height: 400px; display: none;">
-                        </div> !-->
-                      <!--  <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
-                        </div> !-->
+                        </div> 
 
-                      <textarea id="editor" name="description" style="overflow:scroll; width: 100%; height:150px;max-height:150px" contenteditable="true"></textarea>
+                        <!-- editor !-->
 
+                        <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
+                        </div> 
 
-                        <section class="panel text-sm doc-buttons" style="margin-top: 20px">
-                          <div class="panel-body">
+                         <!-- editor !-->
 
-                            <label class="col-sm-2 control-label" style="margin-top: 6px;">Upload Photo</label>
-                            <input type="file" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
-                           
-                          </div>
-                      </section>
+                       
+
+                      <input type="hidden" id="process" value="resourcesadd">
 
 
                          
@@ -367,10 +363,10 @@
                     <div class="step-pane" id="step3">
                       <p class="margin-top-20">Quantity*</p>
 
-                      <input type="text" class="form-control" name="availability" id="team" data-trigger="change" placeholder="Type the information">
+                       <input type="text" class="form-control" id="quantity" name="quantity" data-trigger="change"  placeholder="Type the quantity">
 
                       <p class="margin-top-20">Website(Optional)</p>
-                      <input type="text" class="form-control" id="code" name="website" data-trigger="change"  placeholder="Type the information">
+                      <input type="text" class="form-control" id="website" name="website" data-trigger="change"  placeholder="Type the information">
 
                      
                        
@@ -424,66 +420,6 @@
   <script src="<?php echo base_url(); ?>application/views/todo/js/markdown/epiceditor.min.js" cache="false"></script>
   <script src="<?php echo base_url(); ?>application/views/todo/js/markdown/demo.js" cache="false"></script>
   
-  <script type="text/javascript">
-    
-    $(document).on('click', '#close-preview', function(){ 
-    $('.image-preview').popover('hide');
-    // Hover befor close the preview
-    $('.image-preview').hover(
-        function () {
-           $('.image-preview').popover('show');
-        }, 
-         function () {
-           $('.image-preview').popover('hide');
-        }
-    );    
-});
 
-$(function() {
-    // Create the close button
-    var closebtn = $('<button/>', {
-        type:"button",
-        text: 'x',
-        id: 'close-preview',
-        style: 'font-size: initial;',
-    });
-    closebtn.attr("class","close pull-right");
-    // Set the popover default content
-    $('.image-preview').popover({
-        trigger:'manual',
-        html:true,
-        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-        content: "There's no image",
-        placement:'bottom'
-    });
-    // Clear event
-    $('.image-preview-clear').click(function(){
-        $('.image-preview').attr("data-content","").popover('hide');
-        $('.image-preview-filename').val("");
-        $('.image-preview-clear').hide();
-        $('.image-preview-input input:file').val("");
-        $(".image-preview-input-title").text("Browse"); 
-    }); 
-    // Create the preview image
-    $(".image-preview-input input:file").change(function (){     
-        var img = $('<img/>', {
-            id: 'dynamic',
-            width:250,
-            height:200
-        });      
-        var file = this.files[0];
-        var reader = new FileReader();
-        // Set preview image into the popover data-content
-        reader.onload = function (e) {
-            $(".image-preview-input-title").text("Change");
-            $(".image-preview-clear").show();
-            $(".image-preview-filename").val(file.name);            
-            img.attr('src', e.target.result);
-            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-        }        
-        reader.readAsDataURL(file);
-    });  
-});
-  </script>
 </body>
 </html>

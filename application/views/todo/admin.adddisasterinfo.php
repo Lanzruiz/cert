@@ -271,21 +271,14 @@
                   </ul>
                 </div>
                 <div class="step-content">
-                   <?php echo form_open('systems/process/user/signup?steps=2'); ?>
+                  
                     <div class="step-pane active margin-top-20" id="step1">
 
-                      <p>Resources Name*</p>
-                      <input type="text" class="form-control" id="email" name="email" data-trigger="change">
+                      <p>Disaster Name*</p>
+                      <input type="text" class="form-control" id="disaster" name="disaster">
 
 
-                        <section class="panel text-sm doc-buttons" style="margin-top: 20px">
-                          <div class="panel-body">
-
-                            <label class="col-sm-2 control-label" style="margin-top: 6px;">Upload Photo</label>
-                            <input type="file" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">
-                           
-                          </div>
-                      </section>
+                       
 
 
 
@@ -355,7 +348,7 @@
                           </div>
                           <input type="text" class="form-control-trans pull-left" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" style="width: 25px; height: 400px; display: none;">
                         </div>
-                        <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
+                        <div class="form-control" id="before" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
                         </div>
 
 
@@ -425,7 +418,7 @@
                           </div>
                           <input type="text" class="form-control-trans pull-left" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" style="width: 25px; height: 400px; display: none;">
                         </div>
-                        <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
+                        <div class="form-control" id="during" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
                         </div>
 
                      
@@ -492,9 +485,9 @@
                           </div>
                           <input type="text" class="form-control-trans pull-left" data-edit="inserttext" id="voiceBtn" x-webkit-speech="" style="width: 25px; height: 400px; display: none;">
                         </div>
-                        <div id="editor" class="form-control" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
+                        <div class="form-control" id="after" style="overflow:scroll; height:150px;max-height:150px" contenteditable="true">
                         </div>
-
+                        <input type="hidden" id="process" value="disasterinfoadd">
                      
                        
                     </div>
@@ -503,7 +496,7 @@
                     <button type="button" id="button" class="btn btn-white btn-sm btn-next" data-target="#form-wizard" data-wizard="next" data-last="Finish">Next</button>
                   </div>
                                 
-                   <?php echo form_close(); ?>
+                 
                  
                 </div>
               </div>

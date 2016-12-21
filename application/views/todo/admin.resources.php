@@ -376,7 +376,7 @@
                                           <button class="btn btn-sm btn-white" onclick="addresources()">Apply</button>                    
                                         </div>
 
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                           <div class="input-group">
                                             <input type="text" class="input-sm form-control" id="search_resources" placeholder="Search">
                                             <span class="input-group-btn">
@@ -399,78 +399,25 @@
                                             </tr>
                                           </thead>
                                           <tbody>
+                                               <?php
+                                               foreach ($resources as $row) { 
+                                            ?>
                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="2"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 25, 2013</td>
+                                              <td><input type="checkbox" name="chk[]" value="2"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                              <td><?php echo $row->availability; ?></td>
+                                              <td><?php echo $row->date_created; ?></td>
                                               <td>
                                                 <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
                                               </td>
+                                            
+                                            
+                                              
                                             </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="3"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 22, 2013</td>
-                                              <td>
-                                                <a href="#" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Avatar system</td>
-                                              <td>15c</td>
-                                              <td>Jul 15, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Throwdown</td>
-                                              <td>4c</td>
-                                              <td>Jul 11, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="5"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 7, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="6"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 3, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="7"></td>
-                                              <td>Avatar system </td>
-                                              <td>15c</td>
-                                              <td>Jul 2, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
+
+                                           <?php
+                                             }
+                                            ?>
                                           </tbody>
                                         </table>
                                       </div>

@@ -102,12 +102,7 @@
                    <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="<?php echo base_url(); ?>/admin/settings">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
+              
             </ul>
           </nav>
           <!-- / nav -->
@@ -140,10 +135,11 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="hidden-xs">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-bell-alt text-white"></i>
-                  <span class="badge up bg-info m-l-n-sm">2</span>
+                <a href="<?php echo base_url(); ?>admin/apppreview">
+                  <i class="icon-eye-open text-white"></i> Preview App
+                  <!--<span class="badge up bg-info m-l-n-sm">2</span>!-->
                 </a>
+                <!--
                 <section class="dropdown-menu animated fadeInUp input-s-lg">
                   <section class="panel bg-white">
                     <header class="panel-heading">
@@ -172,6 +168,7 @@
                     </footer>
                   </section>
                 </section>
+                !-->
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">

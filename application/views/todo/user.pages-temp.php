@@ -77,27 +77,16 @@
                 </a>
               </li>              
              
-               <li class="dropdown-submenu active">
+               <li class="active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="icon-file-text"></i>
                   <span>Pages</span>
                 </a>
-                <ul class="dropdown-menu">                
-                  <li class="active">
-                    <a href="#">List Pages</a>                    
-                  </li>
-                  <li>
-                    <a href="<?php echo base_url(); ?>/users/createpage">Create Page</a>              
-                  </li>
-                  <li>
-                    <a href="dashboard-2.html">Edit Page</a>
-                  </li>
-                  
-                </ul>
+                
                
               </li>
-              <li class="dropdown-submenu">
-                <a href="#">
+              <li>
+                <a href="<?php echo base_url(); ?>/users/menus">
                   <i class="icon-reorder"></i>
                   <span>Menu</span>
                 </a>
@@ -113,17 +102,12 @@
               </li>
               !-->
               <li>
-                <a href="tasks.html">
+                <a href="<?php echo base_url(); ?>/users/kits">
                   <i class="icon-briefcase"></i>
-                  <span>Kits</span>
+                  <span>Disaster & Kits</span>
                 </a>
               </li>
-              <li>
-                <a href="notes.html">
-                  <i class="icon-pencil"></i>
-                  <span>Notes</span>
-                </a>
-              </li>
+             
               <li>
                 <a href="timeline.html">
                   <i class="icon-gears"></i>
@@ -169,9 +153,9 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="hidden-xs">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-bell-alt text-white"></i>
-                  <span class="badge up bg-info m-l-n-sm">2</span>
+                <a href="<?php echo base_url(); ?>admin/apppreview">
+                  <i class="icon-eye-open text-white"></i> Preview App
+                  <!--<span class="badge up bg-info m-l-n-sm">2</span>!-->
                 </a>
                 <section class="dropdown-menu animated fadeInUp input-s-lg">
                   <section class="panel bg-white">
@@ -207,7 +191,11 @@
                   <span class="thumb-sm avatar pull-left m-t-n-xs m-r-xs">
                     <img src="<?php echo base_url(); ?>application/views/todo/images/avatar.jpg">
                   </span>
-                  John.Smith <b class="caret"></b>
+                   <?php
+                     
+                     echo $users;
+                  ?>
+                  <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu animated fadeInLeft">
                   <li>
@@ -244,7 +232,7 @@
                 <div class="col-sm-8">
                   <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
                     <div class="pull-left">                  
-                      <a href="#" class="btn btn-s-md btn-success">Create Page</a>
+                      <a href="<?php echo base_url(); ?>/users/addpage" class="btn btn-s-md btn-success">Create Page</a>
                     </div>
                    
                   </div>
@@ -301,164 +289,52 @@
                                                
                                               </th>
                                               <th>Status</th>
-                                              <th>Date Publish</th>
+                                              <th>Editable</th>
                                               <th width="30"></th>
                                             </tr>
                                           </thead>
                                           <tbody>
+                                           
+                                              <?php
+                                            foreach ($pages as $row) { 
+                                          ?>
                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="2"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 25, 2013</td>
+                                              <td><input type="checkbox" id="pages[]" name="pages" value="<?php echo $row->id; ?>"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                             
+                                              <td><?php
+
+                                                 if($row->status == 0) {
+
+                                                    echo 'inactive';
+                                                 } else {
+
+                                                     echo 'active';
+                                                 }
+
+
+                                                 ?></td>
+                                              <td><?php 
+
+                                                    if($row->editable == 0) {
+
+                                                         echo 'no (only admin can edit)';
+                                                    } else {
+
+                                                         echo 'yes';
+                                                    }
+
+                                              ?></td>
                                               <td>
                                                 <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
                                               </td>
                                             </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="3"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 22, 2013</td>
-                                              <td>
-                                                <a href="#" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Avatar system</td>
-                                              <td>15c</td>
-                                              <td>Jul 15, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="4"></td>
-                                              <td>Throwdown</td>
-                                              <td>4c</td>
-                                              <td>Jul 11, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="5"></td>
-                                              <td>Idrawfast</td>
-                                              <td>4c</td>
-                                              <td>Jul 7, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="6"></td>
-                                              <td>Formasa</td>
-                                              <td>8c</td>
-                                              <td>Jul 3, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="7"></td>
-                                              <td>Avatar system </td>
-                                              <td>15c</td>
-                                              <td>Jul 2, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="checkbox" name="post[]" value="8"></td>
-                                              <td>Videodown</td>
-                                              <td>4c</td>
-                                              <td>Jul 1, 2013</td>
-                                              <td>
-                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
-                                              </td>
-                                            </tr>
+                                         <?php
+                                          
+                                           }                                         
+
+                                         ?> 
+                                            
                                           </tbody>
                                         </table>
                                       </div>

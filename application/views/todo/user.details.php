@@ -36,71 +36,7 @@
           </a>
         </header>
         <section>
-          <!-- nav -->
-          <nav class="nav-primary hidden-xs">
-            <ul class="nav">
-              <li class="active">
-                <a href="index.html">
-                  <i class="icon-home"></i>
-                  <span>Dashboard</span>
-                </a>
-              </li>              
-             
-               <li class="dropdown-submenu">
-                <a href="<?php echo base_url(); ?>/users/pages/list" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-file-text"></i>
-                  <span>Pages</span>
-                </a>
-                <ul class="dropdown-menu">                
-                  <li>
-                    <a href="#">List</a>                    
-                  </li>
-                  <li>
-                    <a href="#">New</a>              
-                  </li>
-                  <li>
-                    <a href="#">Edit</a>
-                  </li>
-                 
-                </ul>
-              </li>
-              <li class="dropdown-submenu">
-                <a href="#">
-                  <i class="icon-reorder"></i>
-                  <span>Menu</span>
-                </a>
-                
-              </li>
-              <!--
-              <li>
-                <a href="mail.html">
-                  <b class="badge bg-primary pull-right">3</b>
-                  <i class="icon-envelope-alt"></i>
-                  <span>Mail</span>
-                </a>
-              </li>
-              !-->
-              <li>
-                <a href="#">
-                  <i class="icon-briefcase"></i>
-                  <span>Kits</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-pencil"></i>
-                  <span>Notes</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <!-- / nav -->
+        
         </section>
         
       </section>
@@ -129,11 +65,13 @@
                   </ul>
                 </div>
                 <div class="step-content">
-                   <?php echo form_open('systems/process/user/signup?steps=2'); ?>
+                  
                     <div class="step-pane active margin-top-20" id="step1">
 
                       <p>Email*</p>
                       <input type="text" class="form-control" id="email" name="email" data-trigger="change"  value="<?php echo $email; ?>">
+
+                      <input type="hidden" id="process" value="useradd">
 
                       <p class="margin-top-20">Password*</p>
                       <input type="text" class="form-control" data-type="password" id="password" name="password" data-trigger="change"  placeholder="Type the information">
@@ -184,7 +122,7 @@
                     <button type="button" id="button" class="btn btn-white btn-sm btn-next" data-target="#form-wizard" data-wizard="next" data-last="Finish">Next</button>
                   </div>
                                 
-                   <?php echo form_close(); ?>
+                  
                  
                 </div>
               </div>

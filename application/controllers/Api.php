@@ -30,6 +30,8 @@ class Api extends CI_Controller {
 
 	}
 
+	public function 
+
 	public function call($type, $process, $code, $credential) {
 
           Switch($type) {

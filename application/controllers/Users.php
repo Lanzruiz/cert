@@ -22,7 +22,7 @@ class Users extends CI_Controller {
 
 		parent::__construct();
 
-		$this->load->model(array('users_model', 'teams_model', 'pages_model'));
+		$this->load->model(array('users_model', 'teams_model', 'pages_model', 'menus_model', 'resources_model'));
 	}
 
 	public function index()
@@ -40,21 +40,141 @@ class Users extends CI_Controller {
 
 		 	 );
 
-		 	
+             $output = array(
 
-		 	 
-             $data['team'] = $this->teams_model->get_name($data);
+             	   'team' => $this->teams_model->get_name($data),
+             	   'code' => $this->teams_model->get_code($data),
+             	   'users' => $this->users_model->getdetails($data)
 
-             $data['code'] = $this->teams_model->get_code($data);
+             );
 
              
-             $this->load->view('todo/user.dashboard.php', $data);
+             $this->load->view('todo/user.dashboard.php', $output);
 
 		 }
 		 else
 		 {
 		 	 $this->load->view('b3/signin.php');
 		 }
+	}
+
+	public function menus() {
+ 
+        $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['user_email'],
+
+
+		 	 );
+
+
+             $community_id = $this->teams_model->get_id($data);
+
+
+
+
+
+
+
+             $output = array(
+    
+                 'team'       => $this->teams_model->get_name($data),
+                 'code'       => $this->teams_model->get_code($data),
+                 'pages'      => $this->pages_model->sort($community_id),
+                 'users'      => $this->users_model->getdetails($data),
+                 'menus'      => $this->menus_model->sort($community_id),
+                 'resources'  => $this->resources_model->sort($community_id),
+             );
+             
+             $this->load->view('todo/user.menu.php', $output);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 
+
+	}
+
+	public function kits() {
+
+		  $session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['user_email'],
+
+
+		 	 );
+
+
+             $community_id = $this->teams_model->get_id($data);
+
+             $output = array(
+    
+                 'team'       => $this->teams_model->get_name($data),
+                 'code'       => $this->teams_model->get_code($data),
+                 'pages'      => $this->pages_model->sort($community_id),
+                 'users'      => $this->users_model->getdetails($data),
+                 'resources'  => $this->resources_model->sort($community_id)
+             );
+             
+             $this->load->view('todo/user.kits.php', $output);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 	
+
+	}
+
+	public function addpage() {
+
+
+		$session_data = $this->session->userdata('session_data'); 
+
+		if($session_data != '') {
+
+              $data = array(
+
+                 'user_email' => $session_data['user_email'],
+
+
+		 	 );
+
+
+             $community_id = $this->teams_model->get_id($data);
+
+
+
+             $output = array(
+    
+                 'team'       => $this->teams_model->get_name($data),
+                 'code'       => $this->teams_model->get_code($data),
+                 'pages'      => $this->pages_model->sort($community_id),
+                 'users'      => $this->users_model->getdetails($data),
+                 'resources'  => $this->resources_model->sort($community_id)
+             );
+             
+             $this->load->view('todo/user.addpage.php', $output);
+
+		 }
+		 else {
+		 	
+		 	 $this->load->view('b3/signin.php');
+
+		 } 	
+
+
 	}
 
 	public function pages() {
@@ -65,18 +185,29 @@ class Users extends CI_Controller {
 
               $data = array(
 
-                 'user_email' => $session_data['user_email']
+                 'user_email' => $session_data['user_email'],
+
 
 		 	 );
 
-		 	 
-             $data['team']   =  $this->teams_model->get_name($data);
 
-             $data['code']   =  $this->teams_model->get_code($data);
+             $community_id = $this->teams_model->get_id($data);
 
-             $data['pages']  =  $this->pages_model->sort($this->teams_model->get_id($data));
+
+
+
+
+
+
+             $output = array(
+    
+                 'team'   => $this->teams_model->get_name($data),
+                 'code'   => $this->teams_model->get_code($data),
+                 'pages'  => $this->pages_model->sort($community_id),
+                 'users'  => $this->users_model->getdetails($data)
+             );
              
-             $this->load->view('todo/user.pages-temp.php', $data);
+             $this->load->view('todo/user.pages-temp.php', $output);
 
 		 }
 		 else {

@@ -51,7 +51,7 @@
                
               </li>
               <li class="dropdown-submenu">
-                <a href="#">
+                <a href="<?php echo base_url(); ?>/users/menus/">
                   <i class="icon-reorder"></i>
                   <span>Menu</span>
                 </a>
@@ -67,17 +67,12 @@
               </li>
               !-->
               <li>
-                <a href="tasks.html">
+                <a href="<?php echo base_url(); ?>/users/kits">
                   <i class="icon-briefcase"></i>
-                  <span>Kits</span>
+                  <span>Disaster & Kits</span>
                 </a>
               </li>
-              <li>
-                <a href="notes.html">
-                  <i class="icon-pencil"></i>
-                  <span>Notes</span>
-                </a>
-              </li>
+             
               <li>
                 <a href="timeline.html">
                   <i class="icon-gears"></i>
@@ -123,9 +118,9 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="hidden-xs">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-bell-alt text-white"></i>
-                  <span class="badge up bg-info m-l-n-sm">2</span>
+                <a href="<?php echo base_url(); ?>admin/apppreview">
+                  <i class="icon-eye-open text-white"></i> Preview App
+                  <!--<span class="badge up bg-info m-l-n-sm">2</span>!-->
                 </a>
                 <section class="dropdown-menu animated fadeInUp input-s-lg">
                   <section class="panel bg-white">
@@ -161,7 +156,12 @@
                   <span class="thumb-sm avatar pull-left m-t-n-xs m-r-xs">
                     <img src="<?php echo base_url(); ?>application/views/todo/images/avatar.jpg">
                   </span>
-                  John.Smith <b class="caret"></b>
+                  <?php
+                     
+                     echo $users;
+                  ?>
+
+                  <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu animated fadeInLeft">
                   <li>
@@ -287,6 +287,7 @@
                         </section>
                       </section>
                     </aside>
+                    <!--
                     <aside class="b-l aside-lg">
                       <section class="vbox">
                         <section class="scrollable wrapper">
@@ -339,6 +340,7 @@
                         </section>
                       </section>                      
                     </aside>
+                    !-->
                   </section>
                 </section>
               </section>

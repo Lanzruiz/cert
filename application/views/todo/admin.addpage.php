@@ -12,6 +12,94 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/todo/js/nestable/nestable.css" type="text/css" cache="false" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/todo/css/plugin.css" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/todo/css/app.css" type="text/css" />
+  <script src="http://www.enableds.com/analytics/promobile.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+ <script src="<?php echo base_url(); ?>application/views/todo/vendor/tinymce5/js/tinymce/tinymce.dev.js"></script>
+<script src="<?php echo base_url(); ?>application/views/todo/vendor/tinymce5/js/tinymce/plugins/table/plugin.dev.js"></script>
+<script src="<?php echo base_url(); ?>application/views/todo/vendor/tinymce5/js/tinymce/plugins/paste/plugin.dev.js"></script>
+<script src="<?php echo base_url(); ?>application/views/todo/vendor/tinymce5/js/tinymce/plugins/spellchecker/plugin.dev.js"></script>
+ <script>
+  tinymce.init({
+    selector: "textarea#elm1",
+    theme: "modern",
+    plugins: [
+      "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+      "save table contextmenu directionality emoticons template paste textcolor importcss"
+    ],
+    content_css: "css/development.css",
+    add_unload_trigger: false,
+
+    toolbar1: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons table",
+    toolbar2: "custompanelbutton textbutton spellchecker",
+
+    image_advtab: true,
+
+    style_formats: [
+      {title: 'Bold text', format: 'h1'},
+      {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+      {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+      {title: 'Example 1', inline: 'span', classes: 'example1'},
+      {title: 'Example 2', inline: 'span', classes: 'example2'},
+      {title: 'Table styles'},
+      {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+    ],
+
+    template_replace_values : {
+      username : "Jack Black"
+    },
+
+    template_preview_replace_values : {
+      username : "Preview user name"
+    },
+
+    //file_browser_callback: function() {},
+
+    templates: [ 
+      {title: 'Some title 1', description: 'Some desc 1', content: '<strong class="red">My content: {$username}</strong>'}, 
+      {title: 'Some title 2', description: 'Some desc 2', url: 'development.html'} 
+    ],
+
+    setup: function(ed) {
+      ed.addButton('custompanelbutton', {
+        type: 'panelbutton',
+        text: 'Panel',
+        panel: {
+          type: 'form',
+          items: [
+            {type: 'button', text: 'Ok'},
+            {type: 'button', text: 'Cancel'}
+          ]
+        }
+      });
+
+      ed.addButton('textbutton', {
+        type: 'button',
+        text: 'Text'
+      });
+    },
+
+    spellchecker_callback: function(method, words, callback) {
+      if (method == "spellcheck") {
+        var suggestions = {};
+
+        for (var i = 0; i < words.length; i++) {
+          suggestions[words[i]] = ["First", "second"];
+        }
+
+        callback(suggestions);
+      }
+    }
+  });
+</script>
+<style>
+*:focus {
+  outline: 1px solid red !important;
+}
+</style>
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
@@ -99,12 +187,7 @@
                   <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="timeline.html">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
+             
             </ul>
           </nav>
           <!-- / nav -->
@@ -220,7 +303,8 @@
                 <div class="col-sm-4">
                  <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
                     <div class="pull-left">                  
-                      <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" data-target="#createAdmin">Save Page</a>
+                      <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" id="savepage" data-target="#createAdmin">Save Page</a>
+                      
                     </div>
                    
                   </div>
@@ -235,7 +319,7 @@
                   <div class="col-sm-12">
                     <div class="form-group">
                       
-                        <input type="text" class="form-control" id="recipient-name" placeholder="Type the page name....">
+                        <input type="text" name="pagename" class="form-control" id="pagename" placeholder="Type the page name....">
                     </div>
                   </div>
                 
@@ -245,92 +329,54 @@
 
             
         
-          <div class="row m-b" style="margin-top: 30px">
-           
-            <div class="col-sm-8">
-              <section class="scrollable wrapper">
-                      <!-- task list -->
-                      <ul id="task-list" class="list-group list-group-sp">
-                     
-                        <li class="list-group-item hover">
-                          <div class="view" id="task-9">
-                            <button class="destroy close hover-action">×</button>
-                            <div class="checkbox">
-                              <input class="toggle" type="checkbox">
-                              <span class="task-name">Resources Name</span>
-                              <input class="edit form-control" type="text" value="New task">
-                            </div>
-                          </div>
-                        </li><li class="list-group-item hover">
-                          <div class="view" id="task-8">
-                            <button class="destroy close hover-action">×</button>
-                            <div class="checkbox">
-                              <input class="toggle" type="checkbox">
-                              <span class="task-name">Resources Name</span>
-                              <input class="edit form-control" type="text" value="New task">
-                            </div>
-                          </div>
-                        </li>
-                       
+          <div class="row m-b" style="margin-top: 30px; padding-right: 4%; padding-left: 1%">
 
-                        </ul>
-                       
-                      <!-- task list -->
-                    </section>
-            </div>
-            <div class="col-md-4">
-             <section class="panel">
-                      <header class="panel-heading bg-success">
-                        <ul class="nav nav-tabs nav-justified text-uc">
-                          <li class="active"><a href="#popular" data-toggle="tab">Add Content</a></li>
+        
+              <div class="col-sm-12">
+             
+               <form method="post" action="http://www.tinymce.com/dump.php?example=true">
+                 <textarea id="elm1" name="elm1" rows="15" cols="80" style="width: 70%"></textarea>
+               </form>
+
+
+                  <div class="row b-b">
+                    <div class="col-sm-8">
+                      <h3 class="m-t m-b-none">Additional Content</h3>
+                    
+                    </div>
+                    <div class="col-sm-4">
+                     <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
+                        <div class="pull-left">                  
                          
-                        
-                        </ul>
-                      </header>
-                      <div class="panel-body">
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="popular">
-                            
-                            
-                             <div class="form-group">
-                                <label for="recipient-name" class="form-control-label">Content Type:</label>
-                                <select class="form-control">
-                                   <option> -- Select -- </option>
-                                   <option value="1">Plan</option>
-                                   <option value="2">Kits</option>
-                                   <option value="3">Disaster Info</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                               <button type="button" class="btn btn-primary">Add Resources</button>
-                            </div>
-                          </div>
-                          <div class="tab-pane" id="comment">
-                           
-                           
-              
-                             <div class="form-group">
-                                <label for="recipient-name" class="form-control-label">Page Name:</label>
-                                <select class="form-control">
-                                   <option> -- Select Level -- </option>
-                                   <option value="1">Super Admin</option>
-                                   <option value="2">Developer</option>
-                                   <option value="3">Support</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                               <button type="button" class="btn btn-primary">Add Menu</button>
-                            </div>
-                            
-                          </div>
-                          <div class="tab-pane" id="recent">
-                            <p class="text-center m-t-sm"><i class="icon-spinner icon-spin icon-2x"></i></p>
-                          </div>
+                         <!-- <button type="button" class="btn btn-primary" id="addcontent">Add Content</button> !-->
+
+                           <select class="selectpicker" id="type">
+                         
+                              <option> -- Choose Type -- </option>
+                              <option value="resources">Resources</option>
+                              <option value="kits">Kits</option>
+                              <option value="disaster">Disaster Info</option>
+                          
+                           </select>
+                           <button class="btn btn-primary" id="btnaddcontent">Add Content</button>
+                          
                         </div>
+                       
                       </div>
-                    </section>
-            </div>
+                    </div>
+                  </div>
+                  <ol class="dd-list" id="test">
+                     <!-- additional content!-->
+                     <!-- additional content!-->
+                  </ol> 
+               
+              </div>
+             
+        
+            
+       
           </div>
+         
 
 
         
@@ -339,16 +385,258 @@
     </section>
     <!-- /.vbox -->
   </section>
+
+ <!-- resources modal !-->
+   <div class="modal fade" id="resourcesModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Resources</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+                                   <section class="panel">
+                                      
+                                      <div class="row text-sm wrapper">
+                                       
+
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Resources Name
+                                               
+                                              </th>
+                                              <th>Resources</th>
+                                              <th>Date Created</th>
+                                              <th width="30">Status</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                               foreach ($resources as $row) { 
+                                            ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="resources" value="<?php echo $row->id; ?>"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                              <td><?php echo $row->availability; ?></td>
+                                              <td><?php echo $row->date_created; ?></td>
+                                              <td>
+                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
+                                            </tr>
+                                            <?php
+                                             }
+                                            ?>
+                                            
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addresources">Add Resources</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- resources modal !-->
+
+ <!-- kits modal !-->
+   <div class="modal fade" id="kitsModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Kits</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+                                   <section class="panel">
+                                      
+                                      <div class="row text-sm wrapper">
+                                        <div class="col-sm-9 m-b-xs">
+                                          <select class="input-sm form-control input-s-sm inline" id="process">
+                                            <option value="0">Create New</option>
+                                            <option value="1">Bulk action</option>
+                                            <option value="2">Delete selected</option>
+                                            <option value="3">Bulk edit</option>
+                                            
+                                          </select>
+                                          <button class="btn btn-sm btn-white" onclick="addkits()">Apply</button>                
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Resources Name
+                                               
+                                              </th>
+                                              <th>Resources</th>
+                                              <th>Date Created</th>
+                                              <th width="30">Status</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <?php
+                                               foreach ($resources as $row) { 
+                                            ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="chk[]" value="2"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                              <td><?php echo $row->availability; ?></td>
+                                              <td><?php echo $row->date_created; ?></td>
+                                              <td>
+                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
+                                            </tr>
+                                            <?php
+                                             }
+                                            ?>
+                                            
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add Resources</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- kits modal !-->
+
+ <!-- disaster modal !-->
+   <div class="modal fade" id="disasterModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Disaster Info</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+                                   <section class="panel">
+                                      
+                                      <div class="row text-sm wrapper">
+                                     
+
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Disaster Name
+                                               
+                                              </th>
+                                            
+                                              <th>Date Created</th>
+                                              <th width="30">Status</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php
+                                            foreach ($disasters as $row) { 
+                                          ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="post[]" value="2"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                             
+                                              <td><?php echo $row->date_created; ?></td>
+                                              <td>
+                                                <a href="#" class="active" data-toggle="class"><i class="icon-ok text-success text-active"></i><i class="icon-remove text-danger text"></i></a>
+                                              </td>
+                                            </tr>
+                                         <?php
+                                          
+                                           }                                         
+
+                                         ?>   
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add Resources</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- disaster modal !-->
+
+
+
 	<script src="<?php echo base_url(); ?>application/views/todo/js/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/bootstrap.js"></script>
   <!-- App -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/app.js"></script>
+   
   <script src="<?php echo base_url(); ?>application/views/todo/js/app.plugin.js"></script>
-  <script src="js/app.data.js"></script>
+
   <!-- Sortable -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/sortable/jquery.sortable.js"></script>
   <script src="<?php echo base_url(); ?>application/views/todo/js/nestable/jquery.nestable.js" cache="false"></script>
   <script src="<?php echo base_url(); ?>application/views/todo/js/nestable/demo.js" cache="false"></script>
+
+  <script src="<?php echo base_url(); ?>application/views/todo/js/app.data.js"></script>
+  <script src="<?php echo base_url(); ?>application/views/todo/js/process.js"></script>
+
+  
 </body>
 </html>

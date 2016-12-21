@@ -119,25 +119,20 @@
               </li>
               !-->
               <li>
-                <a href="tasks.html">
+                <a href="<?php echo base_url(); ?>/admin/kits/">
                   <i class="icon-briefcase"></i>
                   <span>Disaster & Kits</span>
                 </a>
               </li>
              
                <li>
-                <a href="notes.html">
+                <a href="<?php echo base_url(); ?>/admin/support/">
                   <i class="icon-comment"></i>
                   <span>Tickets</span>
                   <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="timeline.html">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
+            
             </ul>
           </nav>
           <!-- / nav -->
@@ -301,7 +296,7 @@
                                         <table class="table table-striped b-t text-sm" id="table_active">
                                           <thead>
                                             <tr>
-                                              <th width="20"><input type="checkbox"></th>
+                                              <th width="20"><input type="checkbox" onchange="checkAll(this)" name="chk[]"></th>
                                               <th class="th-sortable" data-toggle="class">Response Team
                                                
                                               </th>
@@ -317,7 +312,7 @@
                                                foreach ($userlist as $row) { 
                                             ?>
                                             <tr>
-                                              <td><input type="checkbox" name="post[]" value="2"></td>
+                                              <td><input type="checkbox" name="chk[]" value="2"></td>
                                               <td><?php echo $row->community_name; ?></td>
                                               <td><?php echo $row->user_email; ?></td>
                                               <td><?php echo $row->community_number; ?></td>
@@ -397,7 +392,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="exampleModalLabel">Add Admin</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Add Response Group</h4>
         </div>
         <div class="modal-body">
           <?php echo form_open('systems/process/admin/addteam'); ?>
@@ -421,23 +416,12 @@
               <label for="recipient-name" class="form-control-label">First Name:</label>
               <input type="text" class="form-control" name="firstname" id="recipient-name">
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Middle Name:</label>
-              <input type="text" class="form-control" name="middlename" id="recipient-name">
-            </div>
+          
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Last Name:</label>
               <input type="text" class="form-control" name="lastname" id="recipient-name">
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Position to Team:</label>
-              <select class="form-control" name="position">
-                  <option> --- Choose your Position --- </option>
-                  <option value="1">Medical Doctor</option>
-                  <option value="2">Manager</option>
-                  <option value="3">Team Representative</option>
-              </select>
-            </div>
+           
 
             
         
@@ -491,6 +475,8 @@
 });
 
 </script>
+
+<script src="<?php echo base_url(); ?>application/views/todo/js/process.js"></script>
 
 </body>
 </html>

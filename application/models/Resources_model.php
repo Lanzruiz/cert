@@ -6,27 +6,33 @@ class Resources_model extends CI_Model {
 
 
 
-		 $this->db->insert('tbl_user_login', $data);
+		 $this->db->insert('tbl_resources', $data);
 
         
 
 		 return ($this->db->affected_rows() != 1) ? false : true;
-	}
+
+	    }
 
 	
 
-	    function get_name($data) {
+	    public function get_name($data) {
 
-	    	 $condition = "community_creator =" . "'" . $data['user_email'] . "'";
+
+	    	 $id = $data['id'];
+
+	    	 $condition = "id =" ."'".$id."'";
+
+	    	
 
 	         $this->db->select('*');
-	         $this->db->from('tbl_community');
+	         $this->db->from('tbl_resources');
 	         $this->db->where($condition);
 	         $query = $this->db->get();
 
 	         $ret = $query->row();
 
-	         return $ret->community_name;
+	         return $ret->name;
 	    }
 
 	    function get_code($data) {
@@ -78,16 +84,27 @@ class Resources_model extends CI_Model {
 	    function sort($command) {
 
 
+	    	 $condition = "community_id =" . "'" . $command. "'";
+
+
             Switch($command) {
 
 
-                case 'sort_email' :
+                case 'all' :
 
                     $this->db->select('*');
-                    $this->db->from('tbl_community');
-                    $this->db->join('tbl_user_login', 'tbl_community.user_id = tbl_user_login.user_id'); 
+                    $this->db->from('tbl_resources');
+                    
 
                 break;
+
+                default :
+
+                    $this->db->select('*');
+                    $this->db->from('tbl_resources');
+                    $this->db->where($condition);
+
+                break;    
   
             }
             

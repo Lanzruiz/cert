@@ -99,12 +99,7 @@
                   <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="<?php echo base_url(); ?>/admin/settings">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
+             
             </ul>
           </nav>
           <!-- / nav -->

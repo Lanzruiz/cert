@@ -132,12 +132,7 @@
                   <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="<?php echo base_url(); ?>/admin/settings">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
+              
             </ul>
           </nav>
           <!-- / nav -->
@@ -429,10 +424,7 @@
               <label for="recipient-name" class="form-control-label">First Name:</label>
               <input type="text" class="form-control" name="firstname" id="recipient-name">
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Middle Name:</label>
-              <input type="text" class="form-control" name="middlename" id="recipient-name">
-            </div>
+          
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Last Name:</label>
               <input type="text" class="form-control" name="lastname" id="recipient-name">

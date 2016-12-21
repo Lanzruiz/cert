@@ -36,11 +36,18 @@ class Systems extends CI_Controller {
 
     $this->load->model('resources_model');
 
+    $this->load->model('disaster_model');
+
+    $this->load->model('menus_model');
+
     $this->load->helper('date');
 
 	}
 
 	public function process($group, $process) {
+
+
+        date_default_timezone_set('Asia/Jakarta');
 
         Switch($group) {
 
@@ -173,21 +180,13 @@ class Systems extends CI_Controller {
                             if($this->form_validation->run() == FALSE) {
                                 
  
-                               //   $data['email']     = $this->input->post('email');
-                             //     $data['password']  = $this->input->post('password');
-                              //    $data['fname']     = $this->input->post('fname');
-                             //     $data['lname']     = $this->input->post('lname');
-                             //     $data['team']      = $this->input->post('team');
-                             //     $data['code']      = $this->input->post('code');
 
-                              //    $this->load->view('todo/user.details.correction.php', $data);
-
-                               echo "faild2";
+                               echo "faild";
                             
                             } 
                             else {
 
-                                date_default_timezone_set('Asia/Jakarta');
+                               
 
                                 $data = array(
                
@@ -230,7 +229,7 @@ class Systems extends CI_Controller {
 
                                       }      
 
-                                    echo "affirmative";
+                                    echo "user added";
 
                                 	
 
@@ -338,7 +337,7 @@ class Systems extends CI_Controller {
                                     'email'          => $this->input->post('email'),
                                     'password'       => md5($this->input->post('password')),
                                     'firstname'      => $this->input->post('firstname'),
-                                    'middlename'     => $this->input->post('middlename'),
+                                   
                                     'lastname'       => $this->input->post('lastname'),
                                     'level'          => $this->input->post('level'),
                                     'date_created'   => date('Y-m-d H:i:s')
@@ -365,7 +364,7 @@ class Systems extends CI_Controller {
 
                             $this->form_validation->set_rules('firstname', 'First Name', 'required');
 
-                            $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
+                       
 
                             $this->form_validation->set_rules('lastname', 'Last Name', 'required');
 
@@ -373,7 +372,7 @@ class Systems extends CI_Controller {
 
                             $this->form_validation->set_rules('code', 'Code', 'required');
 
-                            $this->form_validation->set_rules('position', 'Position', 'required'); 
+                        
 
                             if($this->form_validation->run() == FALSE) {
 
@@ -391,11 +390,11 @@ class Systems extends CI_Controller {
                                     'user_email'     => $this->input->post('email'),
                                     'user_password'  => md5($this->input->post('password')),
                                     'firstname'      => $this->input->post('firstname'),
-                                    'middlename'     => $this->input->post('middlename'),
+                                  
                                     'lastname'       => $this->input->post('lastname'),
                                     'team'           => $this->input->post('team'),
                                     'code'           => $this->input->post('code'),
-                                    'position'       => $this->input->post('position'),
+                                   
                                     'date_created'   => date('Y-m-d H:i:s')
 
                                  );
@@ -403,121 +402,291 @@ class Systems extends CI_Controller {
                                 if($this->users_model->register($data) == true ) {
 
 
+                                     $pages = $this->pages_model->sort('all');
+
+                                     $user_email = $this->input->post('email');
+
+                                     $user_id =  $this->users_model->get_id($data);
+
+                                     $community_id = $this->teams_model->get_id($data);
+
+
+                                     foreach ($pages as $row) {
+
+                                         $toaddpage = array(
+
+                                             'name'         => $row->name,
+                                             'app_code'     => $this->input->post('code'),
+                                             'status'       => 1,
+                                             'user_id'      => $user_id,
+                                             'community_id' => $community_id
+                                         );
+                                      
+                                         $this->pages_model->add_page($toaddpage);
+                                     }  
+
+
                                      redirect('/admin/users', 'refresh');
-                                }   
+                                } 
+
+                                
+
+
 
                             } 
 
 
                       break;
 
-                      case 'addresources' :
 
-                            $this->form_validation->set_rules('name', 'Name', 'required');
+                      case 'adddisaster' :
 
-                            $this->form_validation->set_rules('description', 'Description', 'required');
+                            $this->form_validation->set_rules('disaster', 'disastername', 'required');
 
-                            $this->form_validation->set_rules('quantity', 'Quantity', 'required');
+                            $this->form_validation->set_rules('before', 'Before', 'required');
 
-                            $images = " ";
+                            $this->form_validation->set_rules('during', 'During', 'required');
+
+                            $this->form_validation->set_rules('after', 'After', 'required');
+
 
                             if($this->form_validation->run() == FALSE) {
 
-                                echo 'faild to add';
+                                 echo "fail";
 
                             }
                             else {
 
 
-                                  $target_dir = "uploads/";
-                                  $target_file = $target_dir . basename($_FILES["image"]["name"]);
-                                  $uploadOk = 1;
-                                  $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-                                  // Check if image file is a actual image or fake image
-                                  if(isset($_POST["submit"])) {
 
-                                      $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                                 $data = array(
+           
+                                     'name'               => $this->input->post('disaster'),
+                                     'disaster_before'    => $this->input->post('before'),
+                                     'disaster_during'    => $this->input->post('during'),
+                                     'disaster_after'     => $this->input->post('after'),
+                                     'date_created'       => date('Y-m-d H:i:s'),
+                                     'status'             => 1
 
-                                     if($check !== false) {
+                                  );
 
-                                       echo "File is an image - " . $check["mime"] . ".";
-                                       $uploadOk = 1;
 
-                                     } else {
+                                  if($this->disaster_model->add($data) == true ) {
 
-                                       echo "File is not an image.";
-                                       $uploadOk = 0;
-                                     }
+                                      
+                                       echo "added";
+
+
+                                  }  
+
+                                 else {
+
+                                      echo  "faild resources";
+
                                   }
 
-                                  // Check if file already exists
-                                  if (file_exists($target_file)) {
 
-                                     echo "Sorry, file already exists.";
-                                     $uploadOk = 0;
-                                   }
+                            }  
 
-                                   // Check file size
-                                  if ($_FILES["image"]["size"] > 5000000000) {
+                      break;
 
-                                     echo "Sorry, your file is too large.";
-                                     $uploadOk = 0;
-                                   }
+                      case 'addpage' :
 
-                                   // Allow certain file formats
-                                   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                                     && $imageFileType != "gif" ) {
-                                        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                                        $uploadOk = 0;
-                                    }
+  
+                            $this->form_validation->set_rules('pagename', 'Page Name', 'required');
 
-                               // Check if $uploadOk is set to 0 by an error
-                                   if ($uploadOk == 0) {
-                                       echo "Sorry, your file was not uploaded.";
-                                       // if everything is ok, try to upload file
-                                   } else {
+                            if($this->form_validation->run() == FALSE) {
 
-                                        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                        //echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+                                 echo "fail";
 
-                                       $images = '/uploads/'. basename( $_FILES["image"]["name"]);
-
-                     
+                            }
+                            else {
 
 
+                                  $data  = array(
 
-                                         } else {
+                                         'name'         => $this->input->post('pagename'),
 
-                                         echo "Sorry, there was an error uploading your file.";
+                                         'app_code'      => 'Administrator',
 
-                                         }
+                                         'status'       => 1,
 
-                                    }
+                                         'community_id' => 0,
 
+                                         'editable'     => 0
 
-                                date_default_timezone_set('Asia/Jakarta');
+                                  );
 
-                                $data = array(
-               
+                                  echo $this->pages_model->add_page($data);
 
-                                    'name'           => $this->input->post('name'),
-                                    'description'    => $this->input->post('password'),
-                                    'image_url'      => $images,
-                                    'availabilty'    => $this->input->post('availability'),
-                                    'date_created'   => date('Y-m-d H:i:s'),
-                                    'status'         => 1,
-                                    'community_id'   => 00000
-                                   
-                                 );
+                                      
+                             }
 
-                                if($this->resources_model->add($data) == true ) {
+                      break;
+
+                      case 'addpageresources' :
 
 
-                                     redirect('/admin/resources', 'refresh');
-                                }   
+                           $data = array(
+           
+                               'page_id'      => $this->input->post('id'),
+                               'content'      => $this->input->post('content'),
+                               'content_type' => $this->input->post('type')
+
+                           );            
+
+                           $this->pages_model->add_page_details($data);
+
+
+                      break;
+
+
+                      case 'resourcesdetails' :
+
+
+
+                           $data = array(
+           
+                               'id' => $this->input->post('r_id')
+
+                           );            
+
+                           $result = $this->resources_model->get_name($data);
+
+                           echo $result; 
+
+
+                      break;
+
+
+                      case 'pagedetails' :
+
+
+
+                           $data = array(
+           
+                               'id' => $this->input->post('r_id')
+
+                           );            
+
+                           $result = $this->pages_model->get_name($data);
+
+                           echo $result; 
+
+
+                      break;
+
+
+
+                       case 'disasterdetails' :
+
+
+
+                           $data = array(
+           
+                               'id' => $this->input->post('r_id')
+
+                           );            
+
+                           $result = $this->disaster_model->get_name($data);
+
+                           echo $result; 
+
+
+                      break;
+
+
+                      case 'savemenu':
+
+
+                           $data = array(
+           
+                               'content'       => $this->input->post('content'),
+                               'community_id'  => $this->input->post('community_id')
+
+                           );
+
+                            if($this->menus_model->add($data) == true ) {
+
+                                      
+                                       echo "added";
+
+
+                             }  
+
+
+                      break;
+
+
+                      case 'editmenu':
+
+
+                           $data = array(
+           
+                               'content'       => $this->input->post('content'),
+                               'community_id'  => $this->input->post('community_id')
+
+                           );
+
+                            if($this->menus_model->update($data) == true ) {
+
+                                      
+                                       echo "edited";
+
+
+                             }  
+
+
+                      break;
+
+                           
+
+
+                      case 'addresources' :
+
+                          
+                            $this->form_validation->set_rules('name', 'Name', 'required');
+
+                            $this->form_validation->set_rules('description', 'Description', 'required');  
+
+                            $this->form_validation->set_rules('availability', 'Availability', 'required');
+
+                            if($this->form_validation->run() == FALSE) {
+
+                                 echo "fail";
+
+                            }
+                            else {
+
+                                   $data = array(
+           
+                                     'name'           => $this->input->post('name'),
+                                     'description'    => $this->input->post('description'),
+                                     'availability'   => $this->input->post('availability'),
+                                     'website'        => $this->input->post('website'),
+                                     'date_created'   => date('Y-m-d H:i:s'),
+                                     'status'         => 1
+
+                                  );
+
+                                  if($this->resources_model->add($data) == true ) {
+
+                                      
+                                       echo "added";
+
+
+                                  }  
+
+                                 else {
+
+                                      echo  "faild resources";
+
+                                  }
 
                             } 
 
+                             
+                       
                       break;
 
 

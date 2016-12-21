@@ -86,11 +86,24 @@
 						
 						<li><a href="#" data-nav-section="faq"><span>FAQ</span></a></li>
 						<li><a href="<?php echo base_url(); ?>users"><span>login</span></a></li>
-						<li class="call-to-action"><a href="<?php echo base_url(); ?>users/signup"><span>Sign up free</span></a></li>
+						<li class="call-to-action"><a href="#"><span id="signup">Sign Up Now</span></a></li>
 					</ul>
 				</div>
 			</nav>
 	  </div>
 	</header>
+	<script type="text/javascript">
+		
+		
+
+			 $("#signup").click(function(){
+
+               alert("test");
+ 
+			 });	
+
+		
+
+	</script>
 
 	

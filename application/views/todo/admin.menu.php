@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/todo/js/nestable/nestable.css" type="text/css" cache="false" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/todo/css/plugin.css" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/todo/css/app.css" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!--[if lt IE 9]>
     <script src="js/ie/respond.min.js" cache="false"></script>
     <script src="js/ie/html5.js" cache="false"></script>
@@ -99,12 +100,7 @@
                   <span>(900)</span>
                 </a>
               </li>
-              <li>
-                <a href="<?php echo base_url(); ?>/admin/settings">
-                  <i class="icon-gears"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
+             
             </ul>
           </nav>
           <!-- / nav -->
@@ -213,12 +209,42 @@
           <section class="vbox flex">
             <header class="header">
               <div class="row b-b">
-                <div class="col-sm-4">
+                <div class="col-sm-8">
                   <h3 class="m-t m-b-none">Menus</h3>
                   <p class="block text-muted">Welcome to application</p>
                 </div>
-                <div class="col-sm-8">
-                 
+                <div class="col-sm-4">
+                   <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
+                    <div class="pull-left">
+                    <?php
+
+
+                       foreach ($menus as $row) {
+
+                          if($row->content == "") {
+                          
+
+                    ?>                  
+                      <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" id="savemenu" data-target="#createAdmin">Save Menu</a>
+
+                    <?php
+
+                           }
+                           else {
+                     ?>
+
+                        <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" id="editmenu" data-target="#createAdmin">Save Menu</a>
+
+                     <?php
+
+                           }
+                     }      
+                    
+                    ?>  
+                      
+                    </div>
+                   
+                  </div>
                 </div>
               </div>
               
@@ -228,27 +254,28 @@
            
             <div class="col-sm-8">
               <div class="dd" id="nestable3">
-                <ol class="dd-list">
-                  <li class="dd-item dd3-item" data-id="13">
-                      <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content">Item 13</div>
-                  </li>
-                  <li class="dd-item dd3-item" data-id="14">
-                      <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content">Item 14</div>
-                  </li>
-                  <li class="dd-item dd3-item" data-id="15">
-                      <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content">Item 15</div>
-                      <ol class="dd-list">
-                          <li class="dd-item dd3-item" data-id="16">
-                              <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content">Item 16</div>
-                          </li>
-                          <li class="dd-item dd3-item" data-id="17">
-                              <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content">Item 17</div>
-                          </li>
-                          <li class="dd-item dd3-item" data-id="18">
-                              <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content">Item 18</div>
-                          </li>
-                      </ol>
-                  </li>
+               
+                <ol class="dd-list" id="menulist">
+                    
+                    <!-- menu list !-->
+
+
+                       <?php
+                                            
+
+
+                          foreach ($menus as $row) {
+
+                               echo $row->content;
+                          } 
+                          
+                                           
+                                                                             
+
+                      ?>   
+
+                    <!-- menu list !-->
+               
                 </ol>
               </div>
             </div>
@@ -267,19 +294,20 @@
                             
                              <div class="form-group">
                               <label for="recipient-name" class="form-control-label">Menu Name:</label>
-                              <input type="text" class="form-control" id="recipient-name">
+                              <input type="text" class="form-control" id="menuname">
                             </div>
                              <div class="form-group">
-                                <label for="recipient-name" class="form-control-label">Page Assign:</label>
-                                <select class="form-control">
-                                   <option> -- Select Level -- </option>
-                                   <option value="1">Super Admin</option>
-                                   <option value="2">Developer</option>
-                                   <option value="3">Support</option>
+                                <label for="recipient-name" class="form-control-label">Content Type:</label>
+                                <select class="form-control" id="page_type">
+                                   <option> -- Select -- </option>
+                                   <option value="page">Page</option>
+                                   <option value="1">Kits</option>
+                                   <option value="resources">Resources</option>
+                                   <option value="disasters">Disasters</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                               <button type="button" class="btn btn-primary">Add Menu</button>
+                               <button type="button" class="btn btn-primary" id="addmenu">Add Menu</button>
                             </div>
                           </div>
                           <div class="tab-pane" id="comment">
@@ -287,16 +315,17 @@
                            
               
                              <div class="form-group">
-                                <label for="recipient-name" class="form-control-label">Page Name:</label>
-                                <select class="form-control">
-                                   <option> -- Select Level -- </option>
-                                   <option value="1">Super Admin</option>
-                                   <option value="2">Developer</option>
-                                   <option value="3">Support</option>
+                                <label for="recipient-name" class="form-control-label">Content Type:</label>
+                                 <select class="form-control" id="content_type">
+                                   <option> -- Select -- </option>
+                                   <option value="page">Page</option>
+                                   <option value="1">Kits</option>
+                                   <option value="">Resources</option>
+                                   <option value="3">Disaster</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                               <button type="button" class="btn btn-primary">Add Menu</button>
+                               <button type="button" class="btn btn-primary" id="addmenunoname">Add Menu</button>
                             </div>
                             
                           </div>
@@ -316,16 +345,370 @@
     </section>
     <!-- /.vbox -->
   </section>
+
+   <!-- page modal !-->
+   <div class="modal fade" id="pageModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Add Menu</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+              <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Menu Name:</label>
+                              <input type="text" class="form-control" id="menu-name">
+                              <section class="panel" style="margin-top: 10px">
+                                      
+                                      <div class="row text-sm wrapper">
+                                     
+
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Page Name
+                                               
+                                              </th>
+                                            
+                                              <th>Creator</th>
+                                             
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php
+                                            foreach ($pages as $row) { 
+                                          ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="pages" value="<?php echo $row->id; ?>"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                             
+                                              <td><?php echo $row->app_code; ?></td>
+                                            
+                                            </tr>
+                                         <?php
+                                          
+                                           }                                         
+
+                                         ?>   
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+              </div>               
+            <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="assignpagemenu">Assign page on menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- page modal !-->
+
+
+ <!-- page modal no name !-->
+   <div class="modal fade" id="nonamepageModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Add Menu</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+              <div class="form-group">
+                             
+                              <section class="panel" style="margin-top: 10px">
+                                      
+                                      <div class="row text-sm wrapper">
+                                     
+
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Page Name
+                                               
+                                              </th>
+                                            
+                                              <th>Creator</th>
+                                             
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php
+                                            foreach ($pages as $row) { 
+                                          ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="pages" value="<?php echo $row->id; ?>"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                             
+                                              <td><?php echo $row->app_code; ?></td>
+                                            
+                                            </tr>
+                                         <?php
+                                          
+                                           }                                         
+
+                                         ?>   
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+              </div>               
+            <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="assignnonamepagemenu">Assign page on menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- page modal no name !-->
+
+
+  <!-- resources modal !-->
+   <div class="modal fade" id="resourcesModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Add Menu</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+              <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Menu Name:</label>
+                              <input type="text" class="form-control" id="menuname-resources">
+                              <section class="panel" style="margin-top: 10px">
+                                      
+                                      <div class="row text-sm wrapper">
+                                     
+
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Resources Name
+                                               
+                                              </th>
+                                            
+                                              <th>Status</th>
+                                             
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php
+                                            foreach ($resources as $row) { 
+                                          ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="resources" value="<?php echo $row->id; ?>"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                             
+                                              <td><?php 
+
+                                                  if($row->status == 1)
+                                                  {
+                                                      
+                                                      echo "active";
+
+                                                  } else {
+
+                                                      echo "inactive";
+
+
+                                                  }
+
+
+                                              ?></td>
+                                            
+                                            </tr>
+                                         <?php
+                                          
+                                           }                                         
+
+                                         ?>   
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+              </div>               
+            <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="assignresourcesmenu">Assign page on menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- resources modal !-->
+
+
+ <!-- disaster modal !-->
+   <div class="modal fade" id="disastersModal" width="100%" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Add Menu</h4>
+        </div>
+        <div class="modal-body">
+            <!-- table !-->
+              <div class="form-group">
+                              <label for="recipient-name" class="form-control-label">Menu Name:</label>
+                              <input type="text" class="form-control" id="menuname-disaster">
+                              <section class="panel" style="margin-top: 10px">
+                                      
+                                      <div class="row text-sm wrapper">
+                                     
+
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            <input type="text" class="input-sm form-control" id="search_kits" placeholder="Search">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-sm btn-white" type="button">Go!</button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <table class="table table-striped b-t text-sm" id="table_kits">
+                                          <thead>
+                                            <tr>
+                                              <th width="20" style="width: 2px !important"><input type="checkbox"></th>
+                                              <th class="th-sortable" data-toggle="class">Resources Name
+                                               
+                                              </th>
+                                            
+                                              <th>Status</th>
+                                             
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <?php
+                                            foreach ($disasters as $row) { 
+                                          ?>
+                                            <tr>
+                                              <td><input type="checkbox" name="disasters" value="<?php echo $row->id; ?>"></td>
+                                              <td><?php echo $row->name; ?></td>
+                                             
+                                              <td><?php 
+
+                                                  if($row->status == 1)
+                                                  {
+                                                      
+                                                      echo "active";
+
+                                                  } else {
+
+                                                      echo "inactive";
+
+
+                                                  }
+
+
+                                              ?></td>
+                                            
+                                            </tr>
+                                         <?php
+                                          
+                                           }                                         
+
+                                         ?>   
+                                          
+                                          
+                                          
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    
+                                    </section>
+                                <!-- table !-->
+              </div>               
+            <!-- table !-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="assigndisastersmenu">Assign page on menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- disaster modal !-->
+
+
 	<script src="<?php echo base_url(); ?>application/views/todo/js/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/bootstrap.js"></script>
   <!-- App -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/app.js"></script>
+   <script src="<?php echo base_url(); ?>application/views/todo/js/app.data.js"></script>
+    
   <script src="<?php echo base_url(); ?>application/views/todo/js/app.plugin.js"></script>
   <script src="js/app.data.js"></script>
   <!-- Sortable -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/sortable/jquery.sortable.js"></script>
   <script src="<?php echo base_url(); ?>application/views/todo/js/nestable/jquery.nestable.js" cache="false"></script>
   <script src="<?php echo base_url(); ?>application/views/todo/js/nestable/demo.js" cache="false"></script>
+  <script src="<?php echo base_url(); ?>application/views/todo/js/process.js"></script>
+
 </body>
 </html>

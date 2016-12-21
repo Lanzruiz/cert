@@ -503,6 +503,8 @@ $(document).ready(function() {
 	});
 
 
+
+
      $(document).ready(function() {
                 $('#tableData').paging({limit:5});
             });
@@ -516,41 +518,159 @@ $(document).ready(function() {
 
              var x = document.domain;
 
-
-              var postData = {
-
-			      'email'       :  document.getElementById("email").value,
-			      'password'    :  document.getElementById("password").value,
-			      'firstname'   :  document.getElementById("fname").value,
-			      'middlename'  :  document.getElementById("mname").value,
-			      'lastname'    :  document.getElementById("lname").value,
-			      'team'        :  document.getElementById("team").value,
-			      'code'        :  document.getElementById("code").value,
-			      'position'    :  document.getElementById("position").value
-			     
-			  };
-
-   
-             
-
-              $.post('http://'+x+'/cert/systems/process/user/signup?steps=2', postData, function(data){
-		        //This should be JSON preferably. but can't get it to work on jsfiddle
-		        //Depending on what your controller returns you can change the action
-
-		        if (data == "affirmative") { 
-
-		            window.location = "http://"+x+"/cert/users";
-
-		           // alert(data);
-
-		        } else {
-		            
-                    window.location = "http://"+x+"/cert/systems/process/user/signup?steps=1";
-		        }
+             var process_element = document.getElementById("process").value;
 
 
+           
 
-		    });
+            switch (process_element) {
+
+
+            	 case 'useradd' :
+
+
+					              var postData = {
+
+								      'email'       :  document.getElementById("email").value,
+								      'password'    :  document.getElementById("password").value,
+								      'firstname'   :  document.getElementById("fname").value,
+								      'middlename'  :  document.getElementById("mname").value,
+								      'lastname'    :  document.getElementById("lname").value,
+								      'team'        :  document.getElementById("team").value,
+								      'code'        :  document.getElementById("code").value,
+								      'position'    :  document.getElementById("position").value
+								     
+								  };
+
+		   
+		             
+
+					              $.post('http://'+x+'/cert/systems/process/user/signup?steps=2', postData, function(data){
+							        //This should be JSON preferably. but can't get it to work on jsfiddle
+							        //Depending on what your controller returns you can change the action
+
+							      });
+
+
+					              window.location = "http://"+x+"/cert/users";  
+
+		                        break;
+
+
+		         case 'disasterinfoadd' :
+
+		                        var disaster = document.getElementById("disaster").value;
+
+		                        var before   = document.getElementById("before").innerHTML;
+
+		                        var during   = document.getElementById("during").innerHTML;
+
+		                        var after    = document.getElementById("after").innerHTML;
+
+
+
+
+
+		                        var postData = {
+
+								      'disaster'    :  disaster,
+								      'before'      :  before,
+								      'during'      :  during,
+								      'after'       :  after
+								 
+							    };
+
+
+							    $.post('http://'+x+'/cert/systems/process/admin/adddisaster', postData, function(data){
+							        //This should be JSON preferably. but can't get it to work on jsfiddle
+							        //Depending on what your controller returns you can change the action
+
+
+							         alert(data);
+
+							        if(data == 'added') { 
+
+							          
+
+							           window.location = "http://"+x+"/cert/admin/disasters";
+
+							        } else {
+							            
+					                   // window.location = "http://"+x+"/cert/systems/process/user/signup?steps=1";
+
+					                   //alert('faild');
+							        }
+
+
+
+
+							    });
+
+		                        //alert(disaster);
+		         
+		                        break;               
+
+		         case 'resourcesadd':
+		         
+
+		                        var name          = document.getElementById("resourcesname").value;
+		                        var description   = document.getElementById("editor").innerHTML;
+		                        var availability  = document.getElementById("quantity").value;
+		                        var website       = document.getElementById("website").value;
+
+
+
+		                         var postData = {
+
+								      'name'           :  name,
+								      'description'    :  description,
+								      'availability'   :  availability,
+								      'website'        :  website
+								     
+								     
+								  };
+
+		                       
+
+
+		                        $.post('http://'+x+'/cert/systems/process/admin/addresources', postData, function(data){
+							        //This should be JSON preferably. but can't get it to work on jsfiddle
+							        //Depending on what your controller returns you can change the action
+
+							        if(data == 'added') { 
+
+							          
+
+							           window.location = "http://"+x+"/cert/admin/resources";
+
+							        } else {
+							            
+					                   // window.location = "http://"+x+"/cert/systems/process/user/signup?steps=1";
+
+					                   //alert('faild');
+							        }
+
+
+							       
+
+
+
+							    });
+                                 
+                               
+
+
+
+
+		                         break;  
+
+		        default:
+		         
+		               alert('nothing');                              
+		        
+
+
+		    }          
 
 
 
@@ -561,3 +681,46 @@ $(document).ready(function() {
 
 
 });
+
+
+ $(document).ready(function(){
+   
+   
+
+    $("#addcontent").click(function(){
+
+
+           $("#test").append("<li class='dd-item dd3-item'  data-id='13' name='test' class='content'><div class='dd-handle dd3-handle'>Drag</div><div class='dd3-content'>Item 14<input type='hidden' name='addcontent[]' value='test'></div></li>");
+
+      
+
+    });
+
+    
+});
+
+
+ var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
