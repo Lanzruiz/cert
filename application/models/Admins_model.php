@@ -29,7 +29,7 @@ class Admins_model extends CI_Model {
          $user_details = array(
 
               'firstname'      => $data['firstname'],
-              'middlename'     => $data['middlename'],
+             
               'lastname'       => $data['lastname'],
               'level'          => $data['level'],
               'date_created'   => $data['date_created'],

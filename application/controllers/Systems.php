@@ -313,7 +313,7 @@ class Systems extends CI_Controller {
 
                             $this->form_validation->set_rules('firstname', 'First Name', 'required');
 
-                            $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
+                            
 
                             $this->form_validation->set_rules('lastname', 'Last Name', 'required');
 
