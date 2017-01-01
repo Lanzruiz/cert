@@ -79,7 +79,7 @@
                <li class="active">
                 <a href="<?php echo base_url(); ?>/admin/users/">
                   <i class="icon-group"></i>
-                  <span>Response Team</span>
+                  <span>Response Group</span>
                 </a>
 
                
@@ -241,7 +241,7 @@
                 <div class="col-sm-8">
                   <div class="clearfix m-t-lg m-b-sm pull-right pull-none-xs">
                     <div class="pull-left">                  
-                      <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" data-target="#createAdmin">Create Response Team</a>
+                      <a href="#" class="btn btn-s-md btn-success" data-toggle="modal" data-target="#createAdmin">Create Response Group</a>
                     </div>
                    
                   </div>
@@ -257,7 +257,7 @@
                       <section class="vbox">
                         <header class="header bg-light dk">
                           <ul class="nav nav-tabs">
-                            <li class="active"><a href="#active" data-toggle="tab">Response Team List</a></li>
+                            <li class="active"><a href="#active" data-toggle="tab">Response Group List</a></li>
                             <!--
                             <li class=""><a href="#draft" data-toggle="tab">Drafts</a></li>
                             <li class=""><a href="#trash" data-toggle="tab">Trash</a></li>
@@ -297,7 +297,7 @@
                                           <thead>
                                             <tr>
                                               <th width="20"><input type="checkbox" onchange="checkAll(this)" name="chk[]"></th>
-                                              <th class="th-sortable" data-toggle="class">Response Team
+                                              <th class="th-sortable" data-toggle="class">Response Group
                                                
                                               </th>
                                               <th>Email</th>

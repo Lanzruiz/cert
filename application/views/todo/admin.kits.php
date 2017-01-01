@@ -262,7 +262,7 @@
                           <ul class="nav nav-tabs">
                            
                             <li class="active"><a href="#kits" data-toggle="tab">Kits</a></li>
-                            <li class=""><a href="#resources" data-toggle="tab">Resources</a></li>
+                            <li class=""><a href="#resources" data-toggle="tab">Resources Items</a></li>
                             <li class=""><a href="#disaster" data-toggle="tab">Disaster Info</a></li>
                            
                           </ul>

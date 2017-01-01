@@ -166,16 +166,14 @@ class Systems extends CI_Controller {
 
                             $this->form_validation->set_rules('firstname', 'First Name', 'required');
 
-                            $this->form_validation->set_rules('middlename', 'Middle Name', 'required');
-
+                           
                             $this->form_validation->set_rules('lastname', 'Last Name', 'required');
 
                             $this->form_validation->set_rules('team', 'Team Name', 'required');
 
                             $this->form_validation->set_rules('code', 'Code', 'required');
 
-                            $this->form_validation->set_rules('position', 'Position', 'required');
-
+                         
 
                             if($this->form_validation->run() == FALSE) {
                                 
@@ -194,11 +192,11 @@ class Systems extends CI_Controller {
                                     'user_email'     => $this->input->post('email'),
                                     'user_password'  => md5($this->input->post('password')),
                                     'firstname'      => $this->input->post('firstname'),
-                                    'middlename'     => $this->input->post('middlename'),
+                                   
                                     'lastname'       => $this->input->post('lastname'),
                                     'team'           => $this->input->post('team'),
                                     'code'           => $this->input->post('code'),
-                                    'position'       => $this->input->post('position'),
+                                   
                                     'date_created'   => date('Y-m-d H:i:s')
 
                                  );

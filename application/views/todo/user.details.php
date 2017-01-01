@@ -89,8 +89,6 @@
                       <p class="margin-top-20">First Name*</p>
                       <input type="text" class="form-control" name="fname" id="fname" data-trigger="change" placeholder="Type the information">
 
-                       <p class="margin-top-20">Middle Name*</p>
-                      <input type="text" class="form-control" name="mname" id="mname" data-trigger="change" placeholder="Type the information">
 
                        <p class="margin-top-20">Last Name*</p>
                       <input type="text" class="form-control" name="lname" id="lname" data-trigger="change" placeholder="Type the information">
@@ -100,20 +98,13 @@
                      </div>
                   
                     <div class="step-pane" id="step3">
-                      <p class="margin-top-20">Team Name*</p>
+                      <p class="margin-top-20">Response Group Name*</p>
 
                       <input type="text" class="form-control" name="team" id="team" data-trigger="change" placeholder="Type the information">
 
                       <p class="margin-top-20">Code*</p>
                       <input type="text" class="form-control" id="code" data-trigger="change"  placeholder="Type the information">
 
-                      <p class="margin-top-20">Your Position:</p>
-                      <select class="form-control" name="position" id="position">
-                          <option> --- Choose your Position --- </option>
-                          <option value="1">Medical Doctor</option>
-                          <option value="2">Manager</option>
-                          <option value="3">Team Representative</option>
-                      </select>
 
                        
                     </div>
@@ -165,7 +156,8 @@
   <!-- markdown -->
   <script src="<?php echo base_url(); ?>application/views/todo/js/markdown/epiceditor.min.js" cache="false"></script>
   <script src="<?php echo base_url(); ?>application/views/todo/js/markdown/demo.js" cache="false"></script>
-  
+  <script src="<?php echo base_url(); ?>application/views/todo/js/user.process.js" cache="false"></script>
+    
 
 </body>
 </html>

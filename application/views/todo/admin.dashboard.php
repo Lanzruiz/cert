@@ -48,7 +48,7 @@
                <li>
                 <a href="<?php echo base_url(); ?>/admin/users/">
                   <i class="icon-group"></i>
-                  <span>Response Team</span>
+                  <span>Response Group</span>
                 </a>
 
                

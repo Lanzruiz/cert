@@ -69,9 +69,9 @@ class Users_model extends CI_Model {
          $user_details = array(
 
               'first_name'    => $data['firstname'],
-              'middle_name'   => $data['middlename'],
+            
               'last_name'     => $data['lastname'],
-              'position'      => $data['position'],
+        
               'date_created'  => $data['date_created'],
               'user_id'       => $ret->user_id
 

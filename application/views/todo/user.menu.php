@@ -76,13 +76,14 @@
                   <span>Disaster & Kits</span>
                 </a>
               </li>
+              <!--
               <li>
                 <a href="timeline.html">
                   <i class="icon-gears"></i>
                   <span>Settings</span>
                 </a>
               </li>
-             
+             !-->
              
             </ul>
           </nav>

@@ -505,9 +505,7 @@ $(document).ready(function() {
 
 
 
-     $(document).ready(function() {
-                $('#tableData').paging({limit:5});
-            });
+    
 
      $('body').on('click', '.btn-next', function() {
       
@@ -534,11 +532,11 @@ $(document).ready(function() {
 								      'email'       :  document.getElementById("email").value,
 								      'password'    :  document.getElementById("password").value,
 								      'firstname'   :  document.getElementById("fname").value,
-								      'middlename'  :  document.getElementById("mname").value,
+								    
 								      'lastname'    :  document.getElementById("lname").value,
 								      'team'        :  document.getElementById("team").value,
-								      'code'        :  document.getElementById("code").value,
-								      'position'    :  document.getElementById("position").value
+								      'code'        :  document.getElementById("code").value
+								     
 								     
 								  };
 
